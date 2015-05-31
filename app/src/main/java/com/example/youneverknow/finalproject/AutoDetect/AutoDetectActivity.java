@@ -19,6 +19,7 @@ public class AutoDetectActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_autodetect);
 
+
     }
 
 
