@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">FinalProject</string>
+
+    <string name="action_settings">Settings</string>
+
+    <string name="main_title">Lets Weather</string>
+    <string name="main_AutoDetect">Auto Detect</string>
+    <string name="main_EnterLocation">Enter Location</string>
+    <string name="main_ChooseOnMap">Choose on Map</string>
+    <string name="main_Settings">Settings</string>
+</resources>
