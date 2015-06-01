@@ -3,4 +3,17 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
+    <com.example.youneverknow.finalproject.EnterLocation.CustomAutoCompleteView
+        android:id="@+id/myautocomplete"
+        android:layout_width="fill_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/pink_lable"
+        android:completionThreshold="1"
+        android:hint="Enter location here"
+        android:textColorHint="@android:color/white"
+        android:textColor="@android:color/white" >
+    </com.example.youneverknow.finalproject.EnterLocation.CustomAutoCompleteView>
+
+
 </LinearLayout>

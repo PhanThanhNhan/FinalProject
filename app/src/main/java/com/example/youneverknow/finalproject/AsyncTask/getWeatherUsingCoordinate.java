@@ -1,36 +1,35 @@
 package com.example.youneverknow.finalproject.AsyncTask;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.widget.TextView;
 
 import com.example.youneverknow.finalproject.AutoDetect.getLocation;
+import com.example.youneverknow.finalproject.R;
 
 /**
  * Created by YouNeverKnow on 6/1/2015.
  */
 public class getWeatherUsingCoordinate extends AsyncTask<Void, Void, Void>{
 
-    private final Context context;
+    private final Activity activity;
     private double latitude, longitude;
 
-    public getWeatherUsingCoordinate(Context context){
-        this.context = context;
+    public getWeatherUsingCoordinate(Activity context){
+        this.activity = context;
     }
 
     @Override
     protected Void doInBackground(Void... params) {
 
-        getLocation gps = new getLocation(context);
-        if(gps.canGetLocation()){
-            latitude = gps.getLatitude();
-            longitude = gps.getLongitude();
-
-        } else {
-            gps.showSettingsAlert();
-            return null;
-        }
-
-
         return null;
+    }
+
+    @Override
+    protected void onProgressUpdate(Void... values) {
+        super.onProgressUpdate(values);
+
+        TextView textView = (TextView) activity.findViewById(R.id.textView);
     }
 }
