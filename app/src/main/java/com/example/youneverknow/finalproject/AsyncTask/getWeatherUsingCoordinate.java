@@ -16,8 +16,10 @@ public class getWeatherUsingCoordinate extends AsyncTask<Void, Void, Void>{
     private final Activity activity;
     private double latitude, longitude;
 
-    public getWeatherUsingCoordinate(Activity context){
+    public getWeatherUsingCoordinate(Activity context, double latitude, double longitude){
         this.activity = context;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
     @Override

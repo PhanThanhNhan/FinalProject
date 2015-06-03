@@ -9,7 +9,7 @@ import android.support.v4.app.FragmentPagerAdapter;
  */
 public class MyPagerAdapter  extends FragmentPagerAdapter{
 
-    private final String[] TITLES = {"WEATHER TODAY", "NEXT 6 DAYS"};
+    private final String[] TITLES = {"WEATHER TODAY", "WEATHER IN 5 DAYS", "WEATHER IN 16 DAYS"};
 
     public MyPagerAdapter(FragmentManager fm) {
         super(fm);

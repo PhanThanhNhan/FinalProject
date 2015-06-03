@@ -26,9 +26,9 @@ public class ChooseOnMapActivity extends FragmentActivity {
         final GoogleMap googleMap = ((MapFragment)getFragmentManager().findFragmentById(R.id.googleMap )).getMap();
         //googleMap.animateCamera(CameraUpdateFactory.newLatLng(location), 1000, null);
 
-        googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+        googleMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
             @Override
-            public void onMapClick(LatLng latLng) {
+            public void onMapLongClick(LatLng latLng) {
                 googleMap.clear();
                 marker = googleMap.addMarker(new MarkerOptions().position(latLng));
             }
