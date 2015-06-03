@@ -8,10 +8,10 @@
     
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
+        android:layout_height="40dp"
         android:background="#689F38"
         android:text="New York"
-        android:textSize="30sp"
+        android:textSize="25sp"
         android:textColor="@android:color/white"
         android:paddingTop="10dp"
         android:paddingLeft="20dp"/>

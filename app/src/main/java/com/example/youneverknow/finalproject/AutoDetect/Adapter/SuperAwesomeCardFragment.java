@@ -1,5 +1,6 @@
 package com.example.youneverknow.finalproject.AutoDetect.Adapter;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -7,7 +8,8 @@ import android.support.v4.view.ViewCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import butterknife.ButterKnife;
 import lecho.lib.hellocharts.gesture.ZoomType;
@@ -26,7 +28,10 @@ import lecho.lib.hellocharts.view.ColumnChartView;
 import lecho.lib.hellocharts.view.LineChartView;
 
 
+import com.example.youneverknow.finalproject.DataClass.dataFor10days;
 import com.example.youneverknow.finalproject.R;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -73,23 +78,28 @@ public class SuperAwesomeCardFragment extends Fragment{
             generateColumnData();
         }
         else {
-            rootView = inflater.inflate(R.layout.fragment_card_16days,container,false);
+            rootView = inflater.inflate(R.layout.fragment_card_10days,container,false);
 
             _16days_chartTop = (LineChartView) rootView.findViewById(R.id._16days_chart_top);
-            // Generate and set data for line chart
-
-            // *** BOTTOM COLUMN CHART ***
             _16days_chartBottom = (ColumnChartView) rootView.findViewById(R.id._16days_chart_bottom);
+            generateInitialLineData_16();
+            generateLineData_16(ChartUtils.COLOR_RED, 100);
+            generateColumnData_16();
 
+            tvAutoDetect10daysTemperature = (TextView) rootView.findViewById(R.id.tvAutoDetect16daysTemperature);
+            tvAutoDetect10daysDescription = (TextView) rootView.findViewById(R.id.tvAutoDetect16daysDescription);
+            tvAutoDetect10daysPressure = (TextView) rootView.findViewById(R.id.tvAutoDetect16daysPressure);
+            tvAutoDetect10daysHumidity = (TextView) rootView.findViewById(R.id.tvAutoDetect16daysHumidity);
+            tvAutoDetect10daysWind = (TextView) rootView.findViewById(R.id.tvAutoDetect16daysWind);
+            tvAutoDetect10daysTime = (TextView) rootView.findViewById(R.id.tvAutoDetect16daysTime);
+            ivAutoDetect10daysWeatherIcon = (ImageView) rootView.findViewById(R.id.ivAutoDetect16daysWeatherIcon);
 
-            Handler handler = new Handler();
-            handler.postDelayed(new Runnable() {
-                public void run() {
-                    generateInitialLineData_16();
-                    generateLineData_16(ChartUtils.COLOR_RED, 100);
-                    generateColumnData_16();
-                }
-            }, 200);
+            tvAutoDetect10daysTemperature.setText("");
+            tvAutoDetect10daysDescription.setText("");
+            tvAutoDetect10daysPressure.setText("");
+            tvAutoDetect10daysHumidity.setText("");
+            tvAutoDetect10daysWind.setText("");
+            tvAutoDetect10daysTime.setText("");
 
         }
         ButterKnife.inject(this, rootView);
@@ -124,7 +134,7 @@ public class SuperAwesomeCardFragment extends Fragment{
 
             values = new ArrayList<SubcolumnValue>();
             for (int j = 0; j < numSubcolumns; ++j) {
-                values.add(new SubcolumnValue((float) Math.random() * 50f + 5, ChartUtils.pickColor()));
+                values.add(new SubcolumnValue((float) Math.random() * 50f + 5, ChartUtils.COLOR_BLUE));
             }
 
             axisValues.add(new AxisValue(i).setLabel(_5days[i]));
@@ -143,6 +153,7 @@ public class SuperAwesomeCardFragment extends Fragment{
         _5days_chartBottom.setZoomType(ZoomType.HORIZONTAL);
         _5days_chartBottom.setZoomEnabled(false);
 
+
     }
 
     /**
@@ -160,7 +171,7 @@ public class SuperAwesomeCardFragment extends Fragment{
         }
 
         Line line = new Line(values);
-        line.setColor(ChartUtils.COLOR_GREEN).setCubic(true);
+        line.setColor(ChartUtils.COLOR_RED).setCubic(true);
 
         List<Line> lines = new ArrayList<Line>();
         lines.add(line);
@@ -203,24 +214,23 @@ public class SuperAwesomeCardFragment extends Fragment{
 
         @Override
         public void onValueSelected(int columnIndex, int subcolumnIndex, SubcolumnValue value) {
-            generateLineData(value.getColor(), 100);
+            //generateLineData(value.getColor(), 100);
+            generateLineData(ChartUtils.COLOR_RED, 100);
         }
 
         @Override
         public void onValueDeselected() {
-
-            generateLineData(ChartUtils.COLOR_GREEN, 0);
-
+            generateLineData(ChartUtils.COLOR_RED, 0);
         }
     }
 
 
     ///////////////////////////////////////////////////////////////////////////////////////
-    //                                Data For 16 days forecast                           //
+    //                                Data For 10 days forecast                           //
     ///////////////////////////////////////////////////////////////////////////////////////
 
-    public String[] _16days_rain = new String[]{"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15"};
-    public String[] _16days_temperature = new String[]{"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15"};
+    public String[] _16days_rain = new String[]{"0", "1", "2", "3", "4", "5", "6", "7", "8", "9"};
+    public String[] _16days_temperature = new String[]{"0", "1", "2", "3", "4", "5", "6", "7", "8", "9"};
 
     private LineChartView _16days_chartTop;
     private ColumnChartView _16days_chartBottom;
@@ -228,10 +238,27 @@ public class SuperAwesomeCardFragment extends Fragment{
     private LineChartData _16days_lineData;
     private ColumnChartData _16days_columnData;
 
+    private TextView tvAutoDetect10daysTemperature, tvAutoDetect10daysDescription, tvAutoDetect10daysPressure,
+            tvAutoDetect10daysHumidity, tvAutoDetect10daysWind, tvAutoDetect10daysTime;
+    private ImageView ivAutoDetect10daysWeatherIcon;
+
     private void generateColumnData_16() {
 
         int numSubcolumns = 1;
         int numColumns = _16days_rain.length;
+
+        /* Find average value of rains */
+        int aveRain = 0;
+        int sumRain = 0;
+        int numRainDiff0 = 0;
+        for (int i = 0; i < numColumns; i++){
+            if(dataFor10days.data[i].rain == 0){
+               ++numRainDiff0;
+                continue;
+            }
+            sumRain += dataFor10days.data[i].rain;
+        }
+        aveRain = sumRain/(numColumns - numRainDiff0);
 
         List<AxisValue> axisValues = new ArrayList<AxisValue>();
         List<Column> columns = new ArrayList<Column>();
@@ -240,7 +267,11 @@ public class SuperAwesomeCardFragment extends Fragment{
 
             values = new ArrayList<SubcolumnValue>();
             for (int j = 0; j < numSubcolumns; ++j) {
-                values.add(new SubcolumnValue((float) Math.random() * 50f + 5, ChartUtils.pickColor()));
+                //values.add(new SubcolumnValue((float) Math.random() * 50f + 5, ChartUtils.COLOR_BLUE));
+                if (dataFor10days.data[i].rain == 0)
+                    values.add(new SubcolumnValue((float) aveRain, Color.GRAY));
+                else
+                    values.add(new SubcolumnValue((float) dataFor10days.data[i].rain, ChartUtils.COLOR_BLUE));
             }
 
             axisValues.add(new AxisValue(i).setLabel(_16days_rain[i]));
@@ -266,7 +297,7 @@ public class SuperAwesomeCardFragment extends Fragment{
      * will select value on column chart.
      */
     private void generateInitialLineData_16() {
-        int numValues = 16;
+        int numValues = 10;
 
         List<AxisValue> axisValues = new ArrayList<AxisValue>();
         List<PointValue> values = new ArrayList<PointValue>();
@@ -276,10 +307,11 @@ public class SuperAwesomeCardFragment extends Fragment{
         }
 
         Line line = new Line(values);
-        line.setColor(ChartUtils.COLOR_GREEN).setCubic(true);
+        line.setColor(ChartUtils.COLOR_RED).setCubic(true);
 
         List<Line> lines = new ArrayList<Line>();
         lines.add(line);
+
 
         _16days_lineData = new LineChartData(lines);
         _16days_lineData.setAxisXBottom(new Axis(axisValues).setHasLines(true));
@@ -288,10 +320,10 @@ public class SuperAwesomeCardFragment extends Fragment{
         _16days_chartTop.setLineChartData(_16days_lineData);
 
         // For build-up animation you have to disable viewport recalculation.
-        _16days_chartTop.setViewportCalculationEnabled(false);
+        _16days_chartTop.setViewportCalculationEnabled(true);
 
         // And set initial max viewport and current viewport- remember to set viewports after data.
-        Viewport v = new Viewport(0, 110, 15, 0);
+        Viewport v = new Viewport(0, 110, 9, 0);
         _16days_chartTop.setMaximumViewport(v);
         _16days_chartTop.setCurrentViewport(v);
 
@@ -306,9 +338,12 @@ public class SuperAwesomeCardFragment extends Fragment{
         // Modify data targets
         Line line = _16days_lineData.getLines().get(0);// For this example there is always only one line.
         line.setColor(color);
+        int iPos = 0;
         for (PointValue value : line.getValues()) {
             // Change target only for Y value.
-            value.setTarget(value.getX(), (float) Math.random() * range);
+            //value.setTarget(value.getX(), (float) Math.random() * range);
+            value.setTarget(value.getX(), (float) dataFor10days.data[iPos].temperature - 273);
+            ++iPos;
         }
 
         // Start new data animation with 300ms duration;
@@ -318,9 +353,47 @@ public class SuperAwesomeCardFragment extends Fragment{
     private class ValueTouchListener_16 implements ColumnChartOnValueSelectListener {
 
         @Override
-        public void onValueSelected(int columnIndex, int subcolumnIndex, SubcolumnValue value) {}
+        public void onValueSelected(int columnIndex, int subcolumnIndex, SubcolumnValue value) {
+
+            tvAutoDetect10daysTemperature.setText(round2decimal(String.valueOf(dataFor10days.data[columnIndex].temperature - 273)) + (char) 0x00B0 + "C");
+            tvAutoDetect10daysDescription.setText(formalString(dataFor10days.data[columnIndex].description));
+            tvAutoDetect10daysPressure.setText("Pressure: " + dataFor10days.data[columnIndex].pressure + " hPa");
+            tvAutoDetect10daysHumidity.setText("Humidity: " + dataFor10days.data[columnIndex].humidity + "%");
+            tvAutoDetect10daysWind.setText("Wind: " + dataFor10days.data[columnIndex].wind + " m/s");
+            ivAutoDetect10daysWeatherIcon.setImageResource(R.drawable.cloudytest);
+            if(columnIndex == 0)
+                tvAutoDetect10daysTime.setText("Today");
+            else tvAutoDetect10daysTime.setText("Day " + columnIndex);
+        }
 
         @Override
         public void onValueDeselected() {}
+    }
+
+    String round2decimal(String number){
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < number.length(); i++){
+            if(number.charAt(i) == '.'){
+                stringBuilder.append(number.charAt(i));
+                stringBuilder.append(number.charAt(i + 1));
+                stringBuilder.append(number.charAt(i + 2));
+                break;
+            }
+            stringBuilder.append(number.charAt(i));
+        }
+        return stringBuilder.toString();
+    }
+
+    String formalString(String str){
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append((char)(str.charAt(0) - 32));
+        for (int i = 1; i < str.length(); i++){
+            if(str.charAt(i) == '-'){
+                stringBuilder.append(" ");
+                continue;
+            }
+            stringBuilder.append(str.charAt(i));
+        }
+        return stringBuilder.toString();
     }
 }

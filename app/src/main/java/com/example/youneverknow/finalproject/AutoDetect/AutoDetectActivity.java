@@ -7,6 +7,7 @@ import android.support.v4.view.ViewPager;
 import android.widget.Toast;
 
 import com.astuetz.PagerSlidingTabStrip;
+import com.example.youneverknow.finalproject.AsyncTask.getWeatherUsingCoordinate;
 import com.example.youneverknow.finalproject.AutoDetect.Adapter.MyPagerAdapter;
 import com.example.youneverknow.finalproject.R;
 
@@ -28,6 +29,9 @@ public class AutoDetectActivity extends FragmentActivity{
 
         setTabLayout();
         tryGettingLocation();
+
+        getWeatherUsingCoordinate d = new getWeatherUsingCoordinate(this, curLatitude, curLongitude);
+        d.execute();
 
     }
     public void tryGettingLocation(){

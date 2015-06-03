@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+
+
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -40,16 +42,16 @@
                         android:orientation="vertical"
                         android:gravity="center">
                         <ImageView
-                            android:id="@+id/ivAutoDetect5daysWeatherIcon"
+                            android:id="@+id/ivAutoDetect16daysWeatherIcon"
                             android:layout_width="100dp"
-                            android:layout_height="100dp"
-                            android:background="@drawable/cloudytest"/>
-                     <TextView
-                         android:id="@+id/tvAutoDetect5daysTime"
-                         android:layout_width="wrap_content"
-                         android:layout_height="wrap_content"
-                         android:text="Today: 0h"
-                         android:textSize="15dp"/>
+                            android:layout_height="100dp"/>
+
+                        <TextView
+                            android:id="@+id/tvAutoDetect16daysTime"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Today: 0h"
+                            android:textSize="15dp"/>
 
                     </LinearLayout>
                     <LinearLayout
@@ -58,35 +60,35 @@
                         android:layout_weight="3"
                         android:orientation="vertical">
                         <TextView
-                            android:id="@+id/tvAutoDetect5daysTemperature"
+                            android:id="@+id/tvAutoDetect16daysTemperature"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="25 °C"
                             android:textSize="25dp"
                             android:layout_gravity="center"/>
                         <TextView
-                            android:id="@+id/tvAutoDetect5daysDescription"
+                            android:id="@+id/tvAutoDetect16daysDescription"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Sunny"
                             android:textSize="15dp"
                             android:layout_gravity="left"/>
                         <TextView
-                            android:id="@+id/tvAutoDetect5daysPressure"
+                            android:id="@+id/tvAutoDetect16daysPressure"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Pressure: 1000 hPa"
                             android:textSize="15dp"
                             android:layout_gravity="left"/>
                         <TextView
-                            android:id="@+id/tvAutoDetect5daysHumidity"
+                            android:id="@+id/tvAutoDetect16daysHumidity"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Humidity: 87%"
                             android:textSize="15dp"
                             android:layout_gravity="left"/>
                         <TextView
-                            android:id="@+id/tvAutoDetect5daysWind"
+                            android:id="@+id/tvAutoDetect16daysWind"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Wind: 2 m/s"
@@ -104,7 +106,7 @@
 
 
             <lecho.lib.hellocharts.view.LineChartView
-                android:id="@+id/_5days_chart_top"
+                android:id="@+id/_16days_chart_top"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
@@ -119,13 +121,12 @@
                 android:background="@android:color/darker_gray" />
 
             <lecho.lib.hellocharts.view.ColumnChartView
-                android:id="@+id/_5days_chart_bottom"
+                android:id="@+id/_16days_chart_bottom"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:layout_margin="20dp">
             </lecho.lib.hellocharts.view.ColumnChartView>
-
         </LinearLayout>
 
     </android.support.v7.widget.CardView>
