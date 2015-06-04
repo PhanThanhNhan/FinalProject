@@ -44,13 +44,14 @@
                         <ImageView
                             android:id="@+id/ivAutoDetect16daysWeatherIcon"
                             android:layout_width="100dp"
-                            android:layout_height="100dp"/>
+                            android:layout_height="100dp"
+                            android:background="@drawable/cloudytest"/>
 
                         <TextView
                             android:id="@+id/tvAutoDetect16daysTime"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Today: 0h"
+                            android:text="Time: ---"
                             android:textSize="15dp"/>
 
                     </LinearLayout>
@@ -63,35 +64,35 @@
                             android:id="@+id/tvAutoDetect16daysTemperature"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="25 °C"
+                            android:text="---"
                             android:textSize="25dp"
                             android:layout_gravity="center"/>
                         <TextView
                             android:id="@+id/tvAutoDetect16daysDescription"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Sunny"
+                            android:text="Weather: ---"
                             android:textSize="15dp"
                             android:layout_gravity="left"/>
                         <TextView
                             android:id="@+id/tvAutoDetect16daysPressure"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Pressure: 1000 hPa"
+                            android:text="Pressure: ---"
                             android:textSize="15dp"
                             android:layout_gravity="left"/>
                         <TextView
                             android:id="@+id/tvAutoDetect16daysHumidity"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Humidity: 87%"
+                            android:text="Humidity: ---"
                             android:textSize="15dp"
                             android:layout_gravity="left"/>
                         <TextView
                             android:id="@+id/tvAutoDetect16daysWind"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Wind: 2 m/s"
+                            android:text="Wind: ---"
                             android:textSize="15dp"
                             android:layout_gravity="left"/>
                     </LinearLayout>

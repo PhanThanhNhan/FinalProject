@@ -57,12 +57,12 @@
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="2"
-                        android:weightSum="2"
+                        android:weightSum="5"
                         android:orientation="horizontal">
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="1">
+                            android:layout_weight="2">
                             <ImageView
                                 android:id="@+id/ivAutoDetectTodayWeatherIcon"
                                 android:layout_width="wrap_content"
@@ -73,14 +73,14 @@
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="1"
+                            android:layout_weight="3"
                             android:orientation="vertical">
                             <TextView
                                 android:id="@+id/tvAutoDetectTodayTemperature"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="25 °C"
-                                android:textSize="50dp"
+                                android:textSize="40dp"
                                 android:layout_gravity="center"/>
                             <TextView
                                 android:id="@+id/tvAutoDetectTodayWeatherDescription"

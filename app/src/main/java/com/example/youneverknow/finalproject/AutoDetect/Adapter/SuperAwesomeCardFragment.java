@@ -14,6 +14,7 @@ import android.widget.TextView;
 import butterknife.ButterKnife;
 import lecho.lib.hellocharts.gesture.ZoomType;
 import lecho.lib.hellocharts.listener.ColumnChartOnValueSelectListener;
+import lecho.lib.hellocharts.listener.LineChartOnValueSelectListener;
 import lecho.lib.hellocharts.model.Axis;
 import lecho.lib.hellocharts.model.AxisValue;
 import lecho.lib.hellocharts.model.Column;
@@ -21,6 +22,7 @@ import lecho.lib.hellocharts.model.ColumnChartData;
 import lecho.lib.hellocharts.model.Line;
 import lecho.lib.hellocharts.model.LineChartData;
 import lecho.lib.hellocharts.model.PointValue;
+import lecho.lib.hellocharts.model.SelectedValue;
 import lecho.lib.hellocharts.model.SubcolumnValue;
 import lecho.lib.hellocharts.model.Viewport;
 import lecho.lib.hellocharts.util.ChartUtils;
@@ -29,6 +31,7 @@ import lecho.lib.hellocharts.view.LineChartView;
 
 
 import com.example.youneverknow.finalproject.DataClass.dataFor10days;
+import com.example.youneverknow.finalproject.DataClass.dataFor5days;
 import com.example.youneverknow.finalproject.R;
 
 import org.w3c.dom.Text;
@@ -43,8 +46,10 @@ public class SuperAwesomeCardFragment extends Fragment{
 
     private static final String ARG_POSITION = "position";
 
-    //@InjectView(R.id.textView)
-    //TextView textView;
+    private TextView tvAutoDetectTodayTemperature, tvAutoDetectTodayDescription, tvAutoDetectTodayPressure,
+            tvAutoDetectTodayHumidity, tvAutoDetectTodayWind, tvAutoDetectTodayCityName, tvAutoDetectTodaySunrise, tvAutoDetectTodaySunset;
+    private ImageView ivAutoDetectTodayWeatherIcon;
+
     private int position;
 
     public static SuperAwesomeCardFragment newInstance(int position) {
@@ -67,15 +72,44 @@ public class SuperAwesomeCardFragment extends Fragment{
         if(position == 0){
             rootView = inflater.inflate(R.layout.fragment_card_today,container,false);
 
+            tvAutoDetectTodayCityName = (TextView) rootView.findViewById(R.id.tvAutoDetectTodayCityname);
+            tvAutoDetectTodayTemperature = (TextView) rootView.findViewById(R.id.tvAutoDetectTodayTemperature);
+            tvAutoDetectTodayDescription = (TextView) rootView.findViewById(R.id.tvAutoDetectTodayWeatherDescription);
+            tvAutoDetectTodayPressure = (TextView) rootView.findViewById(R.id.tvAutoDetectTodayPressure);
+            tvAutoDetectTodayHumidity = (TextView) rootView.findViewById(R.id.tvAutoDetectTodayHumidity);
+            tvAutoDetectTodayWind = (TextView) rootView.findViewById(R.id.tvAutoDetectTodayWind);
+            tvAutoDetectTodaySunrise = (TextView) rootView.findViewById(R.id.tvAutoDetectTodaySunrise);
+            tvAutoDetectTodaySunset = (TextView) rootView.findViewById(R.id.tvAutoDetectTodaySunset);
+            ivAutoDetectTodayWeatherIcon = (ImageView) rootView.findViewById(R.id.ivAutoDetectTodayWeatherIcon);
+
+            tvAutoDetectTodayCityName.setText(dataFor10days.cityName);
+            tvAutoDetectTodayTemperature.setText(round2decimal(String.valueOf(dataFor10days.data[0].temperature - 273)) + (char) 0x00B0 + "C");
+            tvAutoDetectTodayDescription.setText(formalString(dataFor10days.data[0].description));
+            tvAutoDetectTodayPressure.setText("Pressure: " + dataFor10days.data[0].pressure + " hPa");
+            tvAutoDetectTodayHumidity.setText("Humidity: " + dataFor10days.data[0].humidity + "%");
+            tvAutoDetectTodayWind.setText("Wind: " + dataFor10days.data[0].wind + " m/s");
+            tvAutoDetectTodaySunrise.setText(dataFor10days.sunRise);
+            tvAutoDetectTodaySunset.setText(dataFor10days.sunSet);
+            ivAutoDetectTodayWeatherIcon.setImageResource(R.drawable.cloudytest);
+
         }
         else if (position == 1){
             rootView = inflater.inflate(R.layout.fragment_card_5days,container,false);
+
             _5days_chartTop = (LineChartView) rootView.findViewById(R.id._5days_chart_top);
             // Generate and set data for line chart
             generateInitialLineData();
             // *** BOTTOM COLUMN CHART ***
             _5days_chartBottom = (ColumnChartView) rootView.findViewById(R.id._5days_chart_bottom);
             generateColumnData();
+
+            tvAutoDetect5daysTemperature = (TextView) rootView.findViewById(R.id.tvAutoDetect5daysTemperature);
+            tvAutoDetect5daysDescription = (TextView) rootView.findViewById(R.id.tvAutoDetect5daysDescription);
+            tvAutoDetect5daysPressure = (TextView) rootView.findViewById(R.id.tvAutoDetect5daysPressure);
+            tvAutoDetect5daysHumidity = (TextView) rootView.findViewById(R.id.tvAutoDetect5daysHumidity);
+            tvAutoDetect5daysWind = (TextView) rootView.findViewById(R.id.tvAutoDetect5daysWind);
+            tvAutoDetect5daysTime = (TextView) rootView.findViewById(R.id.tvAutoDetect5daysTime);
+            ivAutoDetect5daysWeatherIcon = (ImageView) rootView.findViewById(R.id.ivAutoDetect5daysWeatherIcon);
         }
         else {
             rootView = inflater.inflate(R.layout.fragment_card_10days,container,false);
@@ -96,11 +130,10 @@ public class SuperAwesomeCardFragment extends Fragment{
 
             tvAutoDetect10daysTemperature.setText("");
             tvAutoDetect10daysDescription.setText("");
-            tvAutoDetect10daysPressure.setText("");
+            tvAutoDetect10daysPressure.setText("You can tap a column");
             tvAutoDetect10daysHumidity.setText("");
             tvAutoDetect10daysWind.setText("");
             tvAutoDetect10daysTime.setText("");
-
         }
         ButterKnife.inject(this, rootView);
         ViewCompat.setElevation(rootView, 50);
@@ -115,17 +148,37 @@ public class SuperAwesomeCardFragment extends Fragment{
     public String[] _5days = new String[]{"Today", "+1", "+2", "+3", "+4"};
     public String[] _5times = new String[]{"0h", "3h", "6h", "9h", "12h", "15h", "18h", "21h"};
 
-
     private LineChartView _5days_chartTop;
     private ColumnChartView _5days_chartBottom;
 
     private LineChartData _5days_lineData;
     private ColumnChartData _5days_columnData;
 
+    private TextView tvAutoDetect5daysTemperature, tvAutoDetect5daysDescription, tvAutoDetect5daysPressure,
+            tvAutoDetect5daysHumidity, tvAutoDetect5daysWind, tvAutoDetect5daysTime;
+    private ImageView ivAutoDetect5daysWeatherIcon;
+
     private void generateColumnData() {
 
         int numSubcolumns = 1;
         int numColumns = _5days.length;
+
+        /* Find average value of rains */
+        int aveRain = 0;
+        int sumRain = 0;
+        int numRainDiff0 = 0;
+        for (int i = 0; i < numColumns; i++){
+            if(dataFor10days.data[i].rain == 0){
+                ++numRainDiff0;
+                continue;
+            }
+            sumRain += dataFor10days.data[i].rain;
+        }
+        if(numRainDiff0 < numColumns){
+            aveRain = sumRain/(numColumns - numRainDiff0);
+            if(aveRain < 1)
+                aveRain = 1;
+        } else aveRain = 5;
 
         List<AxisValue> axisValues = new ArrayList<AxisValue>();
         List<Column> columns = new ArrayList<Column>();
@@ -134,7 +187,10 @@ public class SuperAwesomeCardFragment extends Fragment{
 
             values = new ArrayList<SubcolumnValue>();
             for (int j = 0; j < numSubcolumns; ++j) {
-                values.add(new SubcolumnValue((float) Math.random() * 50f + 5, ChartUtils.COLOR_BLUE));
+                //values.add(new SubcolumnValue((float) Math.random() * 50f + 5, ChartUtils.COLOR_BLUE));
+                if(dataFor10days.data[i].rain == 0)
+                    values.add(new SubcolumnValue((float) aveRain, Color.GRAY));
+                else values.add(new SubcolumnValue((float) dataFor10days.data[i].rain, ChartUtils.COLOR_BLUE));
             }
 
             axisValues.add(new AxisValue(i).setLabel(_5days[i]));
@@ -183,7 +239,7 @@ public class SuperAwesomeCardFragment extends Fragment{
         _5days_chartTop.setLineChartData(_5days_lineData);
 
         // For build-up animation you have to disable viewport recalculation.
-        _5days_chartTop.setViewportCalculationEnabled(false);
+        _5days_chartTop.setViewportCalculationEnabled(true);
 
         // And set initial max viewport and current viewport- remember to set viewports after data.
         Viewport v = new Viewport(0, 110, 7, 0);
@@ -192,18 +248,21 @@ public class SuperAwesomeCardFragment extends Fragment{
 
         _5days_chartTop.setZoomType(ZoomType.HORIZONTAL);
         _5days_chartTop.setZoomEnabled(false);
+        _5days_chartTop.setOnValueTouchListener(new ValueTouchListener_line());
     }
 
-    private void generateLineData(int color, float range) {
+    private void generateLineData(int columnIndex, int color, float range) {
         // Cancel last animation if not finished.
         _5days_chartTop.cancelDataAnimation();
 
         // Modify data targets
         Line line = _5days_lineData.getLines().get(0);// For this example there is always only one line.
         line.setColor(color);
+        int iPos = 0;
         for (PointValue value : line.getValues()) {
             // Change target only for Y value.
-            value.setTarget(value.getX(), (float) Math.random() * range);
+            value.setTarget(value.getX(), (float) dataFor5days.data[columnIndex].time[iPos].temperature - 273);
+            ++iPos;
         }
 
         // Start new data animation with 300ms duration;
@@ -215,12 +274,75 @@ public class SuperAwesomeCardFragment extends Fragment{
         @Override
         public void onValueSelected(int columnIndex, int subcolumnIndex, SubcolumnValue value) {
             //generateLineData(value.getColor(), 100);
-            generateLineData(ChartUtils.COLOR_RED, 100);
+            generateLineData(columnIndex, ChartUtils.COLOR_RED, 100);
+            tvAutoDetect5daysTemperature.setText(round2decimal(String.valueOf(dataFor10days.data[columnIndex].temperature - 273)) + (char) 0x00B0 + "C");
+            tvAutoDetect5daysDescription.setText(formalString(dataFor10days.data[columnIndex].description));
+            tvAutoDetect5daysPressure.setText("Pressure: " + dataFor10days.data[columnIndex].pressure + " hPa");
+            tvAutoDetect5daysHumidity.setText("Humidity: " + dataFor10days.data[columnIndex].humidity + "%");
+            tvAutoDetect5daysWind.setText("Wind: " + dataFor10days.data[columnIndex].wind + " m/s");
+            ivAutoDetect5daysWeatherIcon.setImageResource(R.drawable.cloudytest);
+            if(columnIndex == 0)
+                tvAutoDetect5daysTime.setText("Today");
+            else tvAutoDetect5daysTime.setText("Day " + columnIndex);
+
+            isColumnSelected = true;
+            columnSelectedIndex = columnIndex;
         }
 
         @Override
         public void onValueDeselected() {
-            generateLineData(ChartUtils.COLOR_RED, 0);
+
+        }
+    }
+    private boolean isColumnSelected = false;
+    int columnSelectedIndex = -1;
+
+    private class ValueTouchListener_line implements LineChartOnValueSelectListener {
+        @Override
+        public void onValueSelected(int i, int i1, PointValue pointValue) {
+            if(!isColumnSelected)
+                return;
+            String tempTime = "";
+            switch (i1){
+                case 0:
+                    tempTime = "0h";
+                    break;
+                case 1:
+                    tempTime = "3h";
+                    break;
+                case 2:
+                    tempTime = "6h";
+                    break;
+                case 3:
+                    tempTime = "9h";
+                    break;
+                case 4:
+                    tempTime = "12h";
+                    break;
+                case 5:
+                    tempTime = "15h";
+                    break;
+                case 6:
+                    tempTime = "18h";
+                    break;
+                case 7:
+                    tempTime = "21h";
+                    break;
+            }
+            tvAutoDetect5daysTemperature.setText(round2decimal(String.valueOf(dataFor5days.data[columnSelectedIndex].time[i1].temperature - 273)) + (char) 0x00B0 + "C");
+            tvAutoDetect5daysDescription.setText(formalString(dataFor5days.data[columnSelectedIndex].time[i1].description));
+            tvAutoDetect5daysPressure.setText("Pressure: " + dataFor5days.data[columnSelectedIndex].time[i1].pressure + " hPa");
+            tvAutoDetect5daysHumidity.setText("Humidity: " + dataFor5days.data[columnSelectedIndex].time[i1].humidity + "%");
+            tvAutoDetect5daysWind.setText("Wind: " + dataFor5days.data[columnSelectedIndex].time[i1].wind + " m/s");
+            ivAutoDetect5daysWeatherIcon.setImageResource(R.drawable.cloudytest);
+            if(columnSelectedIndex == 0)
+                tvAutoDetect5daysTime.setText("Today: " + tempTime);
+            else tvAutoDetect5daysTime.setText("Day " + columnSelectedIndex + ": " + tempTime);
+        }
+
+        @Override
+        public void onValueDeselected() {
+
         }
     }
 
@@ -253,12 +375,16 @@ public class SuperAwesomeCardFragment extends Fragment{
         int numRainDiff0 = 0;
         for (int i = 0; i < numColumns; i++){
             if(dataFor10days.data[i].rain == 0){
-               ++numRainDiff0;
+                ++numRainDiff0;
                 continue;
             }
             sumRain += dataFor10days.data[i].rain;
         }
-        aveRain = sumRain/(numColumns - numRainDiff0);
+        if(numRainDiff0 < numColumns){
+            aveRain = sumRain/(numColumns - numRainDiff0);
+            if(aveRain < 1)
+                aveRain = 1;
+        } else aveRain = 5;
 
         List<AxisValue> axisValues = new ArrayList<AxisValue>();
         List<Column> columns = new ArrayList<Column>();
@@ -329,6 +455,7 @@ public class SuperAwesomeCardFragment extends Fragment{
 
         _16days_chartTop.setZoomType(ZoomType.HORIZONTAL);
         _16days_chartTop.setZoomEnabled(false);
+        _16days_chartTop.setOnValueTouchListener(new ValueTouchListener_line_16());
     }
 
     private void generateLineData_16(int color, float range) {
@@ -370,13 +497,39 @@ public class SuperAwesomeCardFragment extends Fragment{
         public void onValueDeselected() {}
     }
 
+    private class ValueTouchListener_line_16 implements LineChartOnValueSelectListener {
+
+        @Override
+        public void onValueSelected(int i, int i1, PointValue pointValue) {
+            tvAutoDetect10daysTemperature.setText(round2decimal(String.valueOf(dataFor10days.data[i1].temperature - 273)) + (char) 0x00B0 + "C");
+            tvAutoDetect10daysDescription.setText(formalString(dataFor10days.data[i1].description));
+            tvAutoDetect10daysPressure.setText("Pressure: " + dataFor10days.data[i1].pressure + " hPa");
+            tvAutoDetect10daysHumidity.setText("Humidity: " + dataFor10days.data[i1].humidity + "%");
+            tvAutoDetect10daysWind.setText("Wind: " + dataFor10days.data[i1].wind + " m/s");
+            ivAutoDetect10daysWeatherIcon.setImageResource(R.drawable.cloudytest);
+            if(i1 == 0)
+                tvAutoDetect10daysTime.setText("Today");
+            else tvAutoDetect10daysTime.setText("Day " + i1);
+        }
+
+        @Override
+        public void onValueDeselected() {
+
+        }
+    }
+
+
     String round2decimal(String number){
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < number.length(); i++){
             if(number.charAt(i) == '.'){
                 stringBuilder.append(number.charAt(i));
                 stringBuilder.append(number.charAt(i + 1));
-                stringBuilder.append(number.charAt(i + 2));
+                if(i + 2 >= number.length())
+                    stringBuilder.append("0");
+                else
+                    stringBuilder.append(number.charAt(i + 2));
+
                 break;
             }
             stringBuilder.append(number.charAt(i));
@@ -385,6 +538,8 @@ public class SuperAwesomeCardFragment extends Fragment{
     }
 
     String formalString(String str){
+        if(str == "")
+            return "";
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append((char)(str.charAt(0) - 32));
         for (int i = 1; i < str.length(); i++){

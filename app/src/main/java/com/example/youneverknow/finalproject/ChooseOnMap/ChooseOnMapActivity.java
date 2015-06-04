@@ -1,8 +1,14 @@
 package com.example.youneverknow.finalproject.ChooseOnMap;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.FragmentActivity;
 
+import com.example.youneverknow.finalproject.AsyncTask.getWeatherUsingCoordinate;
+import com.example.youneverknow.finalproject.AutoDetect.AutoDetectActivity;
+import com.example.youneverknow.finalproject.MainActivity;
 import com.example.youneverknow.finalproject.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -31,6 +37,13 @@ public class ChooseOnMapActivity extends FragmentActivity {
             public void onMapLongClick(LatLng latLng) {
                 googleMap.clear();
                 marker = googleMap.addMarker(new MarkerOptions().position(latLng));
+
+                MainActivity.curLatitude = marker.getPosition().latitude;
+                MainActivity.curLongitude = marker.getPosition().longitude;
+
+                Intent res = new Intent();
+                setResult(Activity.RESULT_OK, res);
+                finish();
             }
         });
 

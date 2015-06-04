@@ -1,14 +1,18 @@
 package com.example.youneverknow.finalproject.AutoDetect;
 
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.astuetz.PagerSlidingTabStrip;
 import com.example.youneverknow.finalproject.AsyncTask.getWeatherUsingCoordinate;
 import com.example.youneverknow.finalproject.AutoDetect.Adapter.MyPagerAdapter;
+import com.example.youneverknow.finalproject.DataClass.dataFor10days;
+import com.example.youneverknow.finalproject.MainActivity;
 import com.example.youneverknow.finalproject.R;
 
 import lecho.lib.hellocharts.view.LineChartView;
@@ -18,7 +22,6 @@ import lecho.lib.hellocharts.view.LineChartView;
  */
 public class AutoDetectActivity extends FragmentActivity{
 
-    protected double curLatitude, curLongitude;
     public static LineChartView chart_top, chart_bottom;
 
 
@@ -28,25 +31,11 @@ public class AutoDetectActivity extends FragmentActivity{
         setContentView(R.layout.activity_autodetect);
 
         setTabLayout();
-        tryGettingLocation();
-
-        getWeatherUsingCoordinate d = new getWeatherUsingCoordinate(this, curLatitude, curLongitude);
-        d.execute();
-
+        TextView tvAutoDetectCityName = (TextView) findViewById(R.id.tvAutoDetectCityname);
+        tvAutoDetectCityName.setText(dataFor10days.cityName);
     }
-    public void tryGettingLocation(){
-        getLocation gps = new getLocation(this);
-        if(gps.canGetLocation()){
-            curLatitude = gps.getLatitude();
-            curLongitude = gps.getLongitude();
-            /* Still getting */
 
-                Toast.makeText(getApplicationContext(), "Latitude: " + curLatitude + "\nLongitude: " + curLongitude, Toast.LENGTH_SHORT).show();
 
-        } else{
-            gps.showSettingsAlert();
-        }
-    }
 
     public void setTabLayout(){
         ViewPager pager = (ViewPager) findViewById(R.id.pager);
