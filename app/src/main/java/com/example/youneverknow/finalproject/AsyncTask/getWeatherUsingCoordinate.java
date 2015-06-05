@@ -148,25 +148,39 @@ public class getWeatherUsingCoordinate extends AsyncTask<Void, Void, Void>{
             dataFor5days.data[i].time = new dataFor5daysTimeNode[8];
             if(i == 0){
                 try{
-                    for(int j = 0; j < (8 - jsonData5days.getJSONArray("list").length()%8); j++){
-                        dataFor5days.data[i].time[j] = new dataFor5daysTimeNode();
-                        dataFor5days.data[i].time[j].temperature = 273;
-                        dataFor5days.data[i].time[j].icon = "";
-                        dataFor5days.data[i].time[j].description = "";
-                        dataFor5days.data[i].time[j].pressure = 0;
-                        dataFor5days.data[i].time[j].humidity = 0;
-                        dataFor5days.data[i].time[j].wind = 0;
+                    if(jsonData5days.getJSONArray("list").length()%8 != 0){
+                        for(int j = 0; j < (8 - jsonData5days.getJSONArray("list").length()%8); j++){
+                            dataFor5days.data[i].time[j] = new dataFor5daysTimeNode();
+                            dataFor5days.data[i].time[j].temperature = 273;
+                            dataFor5days.data[i].time[j].icon = "";
+                            dataFor5days.data[i].time[j].description = "";
+                            dataFor5days.data[i].time[j].pressure = 0;
+                            dataFor5days.data[i].time[j].humidity = 0;
+                            dataFor5days.data[i].time[j].wind = 0;
+                        }
+                        for (int j = (8 - jsonData5days.getJSONArray("list").length()%8); j < 8; j++){
+                            dataFor5days.data[i].time[j] = new dataFor5daysTimeNode();
+                            dataFor5days.data[i].time[j].temperature = Double.parseDouble(jsonData5days.getJSONArray("list").getJSONObject(tempJsonPos).getJSONObject("main").getString("temp"));
+                            dataFor5days.data[i].time[j].icon = jsonData5days.getJSONArray("list").getJSONObject(tempJsonPos).getJSONArray("weather").getJSONObject(0).getString("icon");
+                            dataFor5days.data[i].time[j].description = jsonData5days.getJSONArray("list").getJSONObject(tempJsonPos).getJSONArray("weather").getJSONObject(0).getString("description");
+                            dataFor5days.data[i].time[j].pressure = Double.parseDouble(jsonData5days.getJSONArray("list").getJSONObject(tempJsonPos).getJSONObject("main").getString("pressure"));
+                            dataFor5days.data[i].time[j].humidity = Double.parseDouble(jsonData5days.getJSONArray("list").getJSONObject(tempJsonPos).getJSONObject("main").getString("humidity"));
+                            dataFor5days.data[i].time[j].wind = Double.parseDouble(jsonData5days.getJSONArray("list").getJSONObject(tempJsonPos).getJSONObject("wind").getString("speed"));
+                            ++tempJsonPos;
+                        }
+                    } else {
+                        for (int j = 0; j < 8; j++){
+                            dataFor5days.data[i].time[j] = new dataFor5daysTimeNode();
+                            dataFor5days.data[i].time[j].temperature = Double.parseDouble(jsonData5days.getJSONArray("list").getJSONObject(tempJsonPos).getJSONObject("main").getString("temp"));
+                            dataFor5days.data[i].time[j].icon = jsonData5days.getJSONArray("list").getJSONObject(tempJsonPos).getJSONArray("weather").getJSONObject(0).getString("icon");
+                            dataFor5days.data[i].time[j].description = jsonData5days.getJSONArray("list").getJSONObject(tempJsonPos).getJSONArray("weather").getJSONObject(0).getString("description");
+                            dataFor5days.data[i].time[j].pressure = Double.parseDouble(jsonData5days.getJSONArray("list").getJSONObject(tempJsonPos).getJSONObject("main").getString("pressure"));
+                            dataFor5days.data[i].time[j].humidity = Double.parseDouble(jsonData5days.getJSONArray("list").getJSONObject(tempJsonPos).getJSONObject("main").getString("humidity"));
+                            dataFor5days.data[i].time[j].wind = Double.parseDouble(jsonData5days.getJSONArray("list").getJSONObject(tempJsonPos).getJSONObject("wind").getString("speed"));
+                            ++tempJsonPos;
+                        }
                     }
-                    for (int j = (8 - jsonData5days.getJSONArray("list").length()%8); j < 8; j++){
-                        dataFor5days.data[i].time[j] = new dataFor5daysTimeNode();
-                        dataFor5days.data[i].time[j].temperature = Double.parseDouble(jsonData5days.getJSONArray("list").getJSONObject(tempJsonPos).getJSONObject("main").getString("temp"));
-                        dataFor5days.data[i].time[j].icon = jsonData5days.getJSONArray("list").getJSONObject(tempJsonPos).getJSONArray("weather").getJSONObject(0).getString("icon");
-                        dataFor5days.data[i].time[j].description = jsonData5days.getJSONArray("list").getJSONObject(tempJsonPos).getJSONArray("weather").getJSONObject(0).getString("description");
-                        dataFor5days.data[i].time[j].pressure = Double.parseDouble(jsonData5days.getJSONArray("list").getJSONObject(tempJsonPos).getJSONObject("main").getString("pressure"));
-                        dataFor5days.data[i].time[j].humidity = Double.parseDouble(jsonData5days.getJSONArray("list").getJSONObject(tempJsonPos).getJSONObject("main").getString("humidity"));
-                        dataFor5days.data[i].time[j].wind = Double.parseDouble(jsonData5days.getJSONArray("list").getJSONObject(tempJsonPos).getJSONObject("wind").getString("speed"));
-                        ++tempJsonPos;
-                    }
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

@@ -1,5 +1,6 @@
 package com.example.youneverknow.finalproject.AutoDetect.Adapter;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import butterknife.ButterKnife;
 import lecho.lib.hellocharts.gesture.ZoomType;
@@ -30,9 +32,12 @@ import lecho.lib.hellocharts.view.ColumnChartView;
 import lecho.lib.hellocharts.view.LineChartView;
 
 
+import com.example.youneverknow.finalproject.AutoDetect.AutoDetectActivity;
+import com.example.youneverknow.finalproject.AutoDetect.ContactActivity;
 import com.example.youneverknow.finalproject.DataClass.dataFor10days;
 import com.example.youneverknow.finalproject.DataClass.dataFor5days;
 import com.example.youneverknow.finalproject.R;
+import com.getbase.floatingactionbutton.FloatingActionButton;
 
 import org.w3c.dom.Text;
 
@@ -49,6 +54,7 @@ public class SuperAwesomeCardFragment extends Fragment{
     private TextView tvAutoDetectTodayTemperature, tvAutoDetectTodayDescription, tvAutoDetectTodayPressure,
             tvAutoDetectTodayHumidity, tvAutoDetectTodayWind, tvAutoDetectTodayCityName, tvAutoDetectTodaySunrise, tvAutoDetectTodaySunset;
     private ImageView ivAutoDetectTodayWeatherIcon;
+    private FloatingActionButton fbtnShareFacebook, fbtnShareSMS;
 
     private int position;
 
@@ -81,6 +87,21 @@ public class SuperAwesomeCardFragment extends Fragment{
             tvAutoDetectTodaySunrise = (TextView) rootView.findViewById(R.id.tvAutoDetectTodaySunrise);
             tvAutoDetectTodaySunset = (TextView) rootView.findViewById(R.id.tvAutoDetectTodaySunset);
             ivAutoDetectTodayWeatherIcon = (ImageView) rootView.findViewById(R.id.ivAutoDetectTodayWeatherIcon);
+            fbtnShareFacebook = (FloatingActionButton) rootView.findViewById(R.id.fbtnShareFacebook);
+            fbtnShareFacebook.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(v.getContext(), "FaceBook", Toast.LENGTH_SHORT).show();
+                }
+            });
+            fbtnShareSMS = (FloatingActionButton) rootView.findViewById(R.id.fbtnShareSMS);
+            fbtnShareSMS.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(getActivity(), ContactActivity.class );
+                    startActivity(i);
+                }
+            });
 
             tvAutoDetectTodayCityName.setText(dataFor10days.cityName);
             tvAutoDetectTodayTemperature.setText(round2decimal(String.valueOf(dataFor10days.data[0].temperature - 273)) + (char) 0x00B0 + "C");
@@ -88,8 +109,8 @@ public class SuperAwesomeCardFragment extends Fragment{
             tvAutoDetectTodayPressure.setText("Pressure: " + dataFor10days.data[0].pressure + " hPa");
             tvAutoDetectTodayHumidity.setText("Humidity: " + dataFor10days.data[0].humidity + "%");
             tvAutoDetectTodayWind.setText("Wind: " + dataFor10days.data[0].wind + " m/s");
-            tvAutoDetectTodaySunrise.setText(dataFor10days.sunRise);
-            tvAutoDetectTodaySunset.setText(dataFor10days.sunSet);
+            tvAutoDetectTodaySunrise.setText("Sunrise: " + dataFor10days.sunRise);
+            tvAutoDetectTodaySunset.setText("Sunset: " + dataFor10days.sunSet);
             ivAutoDetectTodayWeatherIcon.setImageResource(R.drawable.cloudytest);
 
         }
@@ -139,6 +160,7 @@ public class SuperAwesomeCardFragment extends Fragment{
         ViewCompat.setElevation(rootView, 50);
         return rootView;
     }
+
 
 
     ///////////////////////////////////////////////////////////////////////////////////////

@@ -5,17 +5,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-    
-    <TextView
-        android:id="@+id/tvAutoDetectCityname"
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         android:background="#689F38"
-        android:text="New York"
-        android:textSize="25sp"
-        android:textColor="@android:color/white"
-        android:paddingTop="10dp"
-        android:paddingLeft="20dp"/>
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tvAutoDetectCityname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="25sp"
+            android:textColor="@android:color/white"
+            android:text="New York"
+            android:paddingTop="10dp"
+            android:paddingLeft="20dp"/>
+
+
+    </RelativeLayout>
 
     <com.astuetz.PagerSlidingTabStrip
         android:id="@+id/tabs"
@@ -23,7 +31,7 @@
         android:layout_height="40dp"
         android:background="@color/green"
         app:pstsPaddingMiddle="true"
-        android:textSize="10dp"
+        android:textSize="15dp"
         />
 
     <android.support.v4.view.ViewPager

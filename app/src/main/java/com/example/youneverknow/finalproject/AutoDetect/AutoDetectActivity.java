@@ -5,6 +5,7 @@ import android.speech.tts.TextToSpeech;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,6 +15,7 @@ import com.example.youneverknow.finalproject.AutoDetect.Adapter.MyPagerAdapter;
 import com.example.youneverknow.finalproject.DataClass.dataFor10days;
 import com.example.youneverknow.finalproject.MainActivity;
 import com.example.youneverknow.finalproject.R;
+import com.getbase.floatingactionbutton.FloatingActionButton;
 
 import lecho.lib.hellocharts.view.LineChartView;
 
@@ -21,8 +23,6 @@ import lecho.lib.hellocharts.view.LineChartView;
  * Created by YouNeverKnow on 5/31/2015.
  */
 public class AutoDetectActivity extends FragmentActivity{
-
-    public static LineChartView chart_top, chart_bottom;
 
 
     @Override
@@ -33,6 +33,7 @@ public class AutoDetectActivity extends FragmentActivity{
         setTabLayout();
         TextView tvAutoDetectCityName = (TextView) findViewById(R.id.tvAutoDetectCityname);
         tvAutoDetectCityName.setText(dataFor10days.cityName);
+
     }
 
 
