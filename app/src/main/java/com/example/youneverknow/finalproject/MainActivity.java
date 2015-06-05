@@ -57,6 +57,9 @@ public class MainActivity extends FragmentActivity {
         btnMainEnterLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                getWeatherUsingCoordinate.loadSaveData(MainActivity.this);
+
                 Intent iGo = new Intent(v.getContext(), EnterLocationActivity.class);
                 startActivity(iGo);
             }
@@ -100,7 +103,7 @@ public class MainActivity extends FragmentActivity {
         if(requestCode == CHOOSE_ON_MAP_RESULT_CODE){
             if(resultCode == RESULT_OK){
 
-                getWeatherUsingCoordinate d = new getWeatherUsingCoordinate(MainActivity.this, curLatitude, curLongitude);
+                getWeatherUsingCoordinate d = new getWeatherUsingCoordinate(MainActivity.this, curLatitude, curLongitude, true);
                 d.execute();
 
                 Toast.makeText(getApplicationContext(), "Latitude: " + curLatitude + "\nLongtitude: " + curLongitude, Toast.LENGTH_LONG).show();

@@ -7,4 +7,6 @@ public class dataFor5days {
 
     public static dataFor5daysDayNode[] data;
 
+    public static dataFor5daysDayNode[] saveDta;
+
 }
