@@ -87,6 +87,7 @@ public class SuperAwesomeCardFragment extends Fragment{
             tvAutoDetectTodaySunrise = (TextView) rootView.findViewById(R.id.tvAutoDetectTodaySunrise);
             tvAutoDetectTodaySunset = (TextView) rootView.findViewById(R.id.tvAutoDetectTodaySunset);
             ivAutoDetectTodayWeatherIcon = (ImageView) rootView.findViewById(R.id.ivAutoDetectTodayWeatherIcon);
+
             fbtnShareFacebook = (FloatingActionButton) rootView.findViewById(R.id.fbtnShareFacebook);
             fbtnShareFacebook.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -102,6 +103,8 @@ public class SuperAwesomeCardFragment extends Fragment{
                     startActivity(i);
                 }
             });
+
+
 
             tvAutoDetectTodayCityName.setText(dataFor10days.cityName);
             tvAutoDetectTodayTemperature.setText(round2decimal(String.valueOf(dataFor10days.data[0].temperature - 273)) + (char) 0x00B0 + "C");

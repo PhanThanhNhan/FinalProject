@@ -1,7 +1,11 @@
 package com.example.youneverknow.finalproject;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.net.wifi.WifiManager;
 import android.os.Handler;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
@@ -9,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.dd.CircularProgressButton;
 import com.example.youneverknow.finalproject.AsyncTask.getWeatherUsingCoordinate;
 import com.example.youneverknow.finalproject.AutoDetect.AutoDetectActivity;
 import com.example.youneverknow.finalproject.AutoDetect.getLocation;
@@ -23,43 +28,73 @@ import java.util.Date;
 
 public class MainActivity extends FragmentActivity {
 
-    private Button btnMainAutoDetect, btnMainEnterLocation, btnMainChooseOnMap, btnMainSettings;
+    private CircularProgressButton btnMainAutoDetect, btnMainEnterLocation, btnMainChooseOnMap, btnMainSettings;;
+
     public static double curLatitude, curLongitude;
     private final int CHOOSE_ON_MAP_RESULT_CODE = 1;
+    public boolean isLocationGotten = false;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         getControl();
         setButtonClickEvents();
-
     }
 
     public void getControl(){
-        btnMainAutoDetect = (Button) findViewById(R.id.btnMainAutoDetect);
-        btnMainEnterLocation = (Button) findViewById(R.id.btnMainEnterLocation);
-        btnMainChooseOnMap = (Button) findViewById(R.id.btnMainChooseOnMap);
-        btnMainSettings = (Button) findViewById(R.id.btnMainSettings);
+        btnMainAutoDetect = (CircularProgressButton) findViewById(R.id.btnMainAutoDetect);
+        btnMainEnterLocation = (CircularProgressButton) findViewById(R.id.btnMainEnterLocation);
+        btnMainChooseOnMap = (CircularProgressButton) findViewById(R.id.btnMainChooseOnMap);
+        btnMainSettings = (CircularProgressButton) findViewById(R.id.btnMainSettings);
     }
 
     public void setButtonClickEvents(){
         btnMainAutoDetect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent iGo = new Intent(v.getContext(), AutoDetectActivity.class);
-                startActivity(iGo);
+                isLocationGotten = false;
+                btnMainAutoDetect.setIndeterminateProgressMode(true);
+                btnMainAutoDetect.setProgress(5);
+                tryGettingLocation();
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    public void run() {
+                        if(isLocationGotten){
+                            ConnectivityManager connManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+                            NetworkInfo mWifi = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+                            if (!mWifi.isConnected()){
+                                Toast.makeText(getApplicationContext(), "No Internet connection", Toast.LENGTH_LONG).show();
+                                btnMainAutoDetect.setProgress(0);
+                                btnMainAutoDetect.setIdleText("Retry");
+                                return;
+                            }
+                            btnMainAutoDetect.setProgress(100);
+                            getWeatherUsingCoordinate weatherAsyncTask = new getWeatherUsingCoordinate(MainActivity.this, curLatitude, curLongitude, true);
+                            weatherAsyncTask.execute();
+                        }
+                        else {
+                            Toast.makeText(getApplicationContext(), "GPS location not found", Toast.LENGTH_LONG).show();
+                            btnMainAutoDetect.setProgress(-1);
+                            Handler handler = new Handler();
+                            handler.postDelayed(new Runnable() {
+                                public void run() {
+                                    btnMainAutoDetect.setProgress(0);
+                                    btnMainAutoDetect.setIdleText("Retry");
+                                }
+                            }, 1000);
+
+                            return;
+                        }
+                    }
+                }, 3000);
             }
         });
 
         btnMainEnterLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                getWeatherUsingCoordinate.loadSaveData(MainActivity.this);
-
                 Intent iGo = new Intent(v.getContext(), EnterLocationActivity.class);
                 startActivity(iGo);
             }
@@ -88,10 +123,11 @@ public class MainActivity extends FragmentActivity {
             curLatitude = gps.getLatitude();
             curLongitude = gps.getLongitude();
             /* Still getting */
-
-            Toast.makeText(getApplicationContext(), "Latitude: " + curLatitude + "\nLongitude: " + curLongitude, Toast.LENGTH_SHORT).show();
-
+            if(curLatitude == 0 && curLatitude == 0)
+                isLocationGotten = false;
+            else isLocationGotten = true;
         } else{
+            isLocationGotten = false;
             gps.showSettingsAlert();
         }
     }
@@ -103,11 +139,16 @@ public class MainActivity extends FragmentActivity {
         if(requestCode == CHOOSE_ON_MAP_RESULT_CODE){
             if(resultCode == RESULT_OK){
 
-                getWeatherUsingCoordinate d = new getWeatherUsingCoordinate(MainActivity.this, curLatitude, curLongitude, true);
-                d.execute();
+                btnMainChooseOnMap.setIndeterminateProgressMode(true);
+                btnMainChooseOnMap.setProgress(5);
 
-                Toast.makeText(getApplicationContext(), "Latitude: " + curLatitude + "\nLongtitude: " + curLongitude, Toast.LENGTH_LONG).show();
-
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    public void run() {
+                        getWeatherUsingCoordinate weatherAsyncTask = new getWeatherUsingCoordinate(MainActivity.this, curLatitude, curLongitude, false);
+                        weatherAsyncTask.execute();
+                    }
+                }, 1000);
             }
         }
     }

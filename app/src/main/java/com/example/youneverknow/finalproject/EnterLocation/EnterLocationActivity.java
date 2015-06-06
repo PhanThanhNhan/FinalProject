@@ -54,6 +54,7 @@ public class EnterLocationActivity extends FragmentActivity {
 
     }
 
+
     public void insertData(){
 
         databaseH.create( new MyObject("Bien Hoa") );

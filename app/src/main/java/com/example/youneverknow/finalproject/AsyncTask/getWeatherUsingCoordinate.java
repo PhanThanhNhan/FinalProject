@@ -8,6 +8,7 @@ import android.os.AsyncTask;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dd.CircularProgressButton;
 import com.example.youneverknow.finalproject.AutoDetect.AutoDetectActivity;
 import com.example.youneverknow.finalproject.AutoDetect.getLocation;
 import com.example.youneverknow.finalproject.DataClass.dataFor10days;
@@ -236,6 +237,14 @@ public class getWeatherUsingCoordinate extends AsyncTask<Void, Void, Void>{
     @Override
     protected void onProgressUpdate(Void... values) {
         super.onProgressUpdate(values);
+
+        CircularProgressButton btnMainAutoDetect = (CircularProgressButton) activity.findViewById(R.id.btnMainAutoDetect);
+        btnMainAutoDetect.setProgress(0);
+        btnMainAutoDetect.setIdleText("Auto-Detect");
+
+        CircularProgressButton btnMainChoosOnMap = (CircularProgressButton) activity.findViewById(R.id.btnMainChooseOnMap);
+        btnMainChoosOnMap.setProgress(0);
+
         Intent iGo = new Intent(activity, AutoDetectActivity.class);
         activity.startActivity(iGo);
     }
