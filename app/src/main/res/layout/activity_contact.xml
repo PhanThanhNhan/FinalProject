@@ -1,4 +1,4 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,21 +7,29 @@
     tools:context=".MainActivity"
     android:baselineAligned="false" >
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/green"
+        android:id="@+id/relativeLayout">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Choose a contact"
+            android:textSize="25dp"
+            android:textColor="@android:color/white"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="15dp"
+            />
+    </RelativeLayout>
+
     <ListView
-        android:id="@+id/list_fruits"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:paddingRight="5dp" >
+        android:id="@+id/lvContact"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingRight="5dp"
+        android:textColor="@color/green"
+        android:layout_below="@+id/relativeLayout">
     </ListView>
 
-    <LinearLayout
-        android:id="@+id/side_index"
-        android:layout_width="50dp"
-        android:layout_height="fill_parent"
-        android:background="#c3c3c3"
-        android:gravity="center_horizontal"
-        android:orientation="vertical" >
-    </LinearLayout>
-
-</LinearLayout>
+</RelativeLayout>

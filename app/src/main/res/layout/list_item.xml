@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <ImageView
+        android:id="@+id/ivEntertLocationIcon"
+        android:layout_width="60dp"
+        android:layout_height="60dp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="vertical"
+        android:layout_toRightOf="@id/ivEntertLocationIcon">
+        <TextView
+            android:id="@+id/tvEnterLocationCityName"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:textSize="20dp"
+            android:text="City"
+            android:gravity="bottom|left"
+            android:layout_marginLeft="15dp"
+            android:textColor="@color/green"/>
+        <TextView
+            android:id="@+id/tvEnterLocationCountry"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:textSize="15dp"
+            android:text="Country"
+            android:gravity="top|left"
+            android:layout_marginLeft="15dp" />
+    </LinearLayout>
+
+</RelativeLayout>

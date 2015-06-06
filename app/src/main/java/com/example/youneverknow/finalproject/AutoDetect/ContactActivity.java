@@ -2,8 +2,12 @@ package com.example.youneverknow.finalproject.AutoDetect;
 
 
 import android.app.Activity;
+import android.app.LoaderManager;
+import android.content.AsyncTaskLoader;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -19,7 +23,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.youneverknow.finalproject.MainActivity;
 import com.example.youneverknow.finalproject.R;
 
 import java.util.ArrayList;
@@ -31,15 +34,16 @@ import java.util.Map;
 /**
  * Created by YouNeverKnow on 6/5/2015.
  */
-public class ContactActivity extends Activity implements View.OnClickListener{
+public class ContactActivity extends Activity implements View.OnClickListener, LoaderManager.LoaderCallbacks<List<String>>{
 
     Map<String, Integer> mapIndex;
-    ListView fruitList;
-    String[] contacts;
+    ListView lvContact;
+    public static String[] contacts;
     String[] tempContact;
     String[] phoneNum;
     int contactIndex = 0;
     public final int MAX_CONTACTS = 1000;
+    private static final int THE_LOADER = 0x01;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,19 +57,10 @@ public class ContactActivity extends Activity implements View.OnClickListener{
         for (int i = 0; i < contactIndex; i++)
             contacts[i] = tempContact[i];
 
-        Arrays.asList(contacts);
+        getLoaderManager().initLoader(THE_LOADER, null, this).forceLoad();
 
-        fruitList = (ListView) findViewById(R.id.list_fruits);
-        fruitList.setAdapter(new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, contacts));
-        setListViewEvent();
-        getIndexList(contacts);
-        displayIndex();
-
-    }
-
-    public void setListViewEvent(){
-        fruitList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        ListView lvContact = (ListView) findViewById(R.id.lvContact);
+        lvContact.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 sendSMS(position);
@@ -92,36 +87,9 @@ public class ContactActivity extends Activity implements View.OnClickListener{
 
     }
 
-
-
-    private void getIndexList(String[] fruits) {
-        mapIndex = new LinkedHashMap<String, Integer>();
-        for (int i = 0; i < fruits.length; i++) {
-            String fruit = fruits[i];
-            String index = fruit.substring(0, 1);
-
-            if (mapIndex.get(index) == null)
-                mapIndex.put(index, i);
-        }
-    }
-
-    private void displayIndex() {
-        LinearLayout indexLayout = (LinearLayout) findViewById(R.id.side_index);
-
-        TextView textView;
-        List<String> indexList = new ArrayList<String>(mapIndex.keySet());
-        for (String index : indexList) {
-            textView = (TextView) getLayoutInflater().inflate(
-                    R.layout.side_index_item, null);
-            textView.setText(index);
-            textView.setOnClickListener(this);
-            indexLayout.addView(textView);
-        }
-    }
-
     public void onClick(View view) {
         TextView selectedIndex = (TextView) view;
-        fruitList.setSelection(mapIndex.get(selectedIndex.getText()));
+        lvContact.setSelection(mapIndex.get(selectedIndex.getText()));
     }
 
     @Override
@@ -133,7 +101,6 @@ public class ContactActivity extends Activity implements View.OnClickListener{
     public void fetchContacts() {
 
         String phoneNumber = null;
-        String email = null;
 
         Uri CONTENT_URI = ContactsContract.Contacts.CONTENT_URI;
         String _ID = ContactsContract.Contacts._ID;
@@ -176,6 +143,40 @@ public class ContactActivity extends Activity implements View.OnClickListener{
                 }
             }
 
+        }
+    }
+
+    @Override
+    public Loader<List<String>> onCreateLoader(int id, Bundle args) {
+        SampleLoader loader = new SampleLoader(this);
+        return loader;    }
+
+    @Override
+    public void onLoadFinished(Loader<List<String>> loader, List<String> list) {
+        final ListView listview = (ListView) findViewById(R.id.lvContact);
+        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_1, list);
+        listview.setAdapter(adapter);
+    }
+
+    @Override
+    public void onLoaderReset(Loader<List<String>> loader) {
+        final ListView listview = (ListView) findViewById(R.id.lvContact);
+        listview.setAdapter(null);
+    }
+
+    private static class SampleLoader extends AsyncTaskLoader<List<String>> {
+
+        public SampleLoader(Context context) {
+            super(context);
+        }
+        @Override
+        public List<String> loadInBackground() {
+            final ArrayList<String> list = new ArrayList<String>();
+            for (int i = 0; i < contacts.length; ++i) {
+                list.add(contacts[i]);
+            }
+            return list;
         }
     }
 }

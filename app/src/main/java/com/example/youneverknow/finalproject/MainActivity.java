@@ -32,6 +32,7 @@ public class MainActivity extends FragmentActivity {
 
     public static double curLatitude, curLongitude;
     private final int CHOOSE_ON_MAP_RESULT_CODE = 1;
+    private final int ENTER_LOCATION_RESULT_CODE = 2;
     public boolean isLocationGotten = false;
 
 
@@ -96,7 +97,7 @@ public class MainActivity extends FragmentActivity {
             @Override
             public void onClick(View v) {
                 Intent iGo = new Intent(v.getContext(), EnterLocationActivity.class);
-                startActivity(iGo);
+                startActivityForResult(iGo, ENTER_LOCATION_RESULT_CODE);
             }
         });
 
@@ -141,6 +142,19 @@ public class MainActivity extends FragmentActivity {
 
                 btnMainChooseOnMap.setIndeterminateProgressMode(true);
                 btnMainChooseOnMap.setProgress(5);
+
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    public void run() {
+                        getWeatherUsingCoordinate weatherAsyncTask = new getWeatherUsingCoordinate(MainActivity.this, curLatitude, curLongitude, false);
+                        weatherAsyncTask.execute();
+                    }
+                }, 1000);
+            }
+        } else if(requestCode == ENTER_LOCATION_RESULT_CODE){
+            if(resultCode == RESULT_OK){
+                btnMainEnterLocation.setIndeterminateProgressMode(true);
+                btnMainEnterLocation.setProgress(5);
 
                 Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {

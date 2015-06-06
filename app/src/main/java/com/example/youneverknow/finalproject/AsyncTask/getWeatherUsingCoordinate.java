@@ -245,6 +245,9 @@ public class getWeatherUsingCoordinate extends AsyncTask<Void, Void, Void>{
         CircularProgressButton btnMainChoosOnMap = (CircularProgressButton) activity.findViewById(R.id.btnMainChooseOnMap);
         btnMainChoosOnMap.setProgress(0);
 
+        CircularProgressButton btnMainEnterLocation = (CircularProgressButton) activity.findViewById(R.id.btnMainEnterLocation);
+        btnMainEnterLocation.setProgress(0);
+
         Intent iGo = new Intent(activity, AutoDetectActivity.class);
         activity.startActivity(iGo);
     }
