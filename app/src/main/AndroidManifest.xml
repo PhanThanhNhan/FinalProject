@@ -36,6 +36,15 @@
         <activity android:name=".ChooseOnMap.ChooseOnMapActivity"/>
         <activity android:name=".Settings.SettingActivity"/>
         <activity android:name=".AutoDetect.ContactActivity"/>
+
+
+        <receiver android:name=".Widget.MyWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
+            </intent-filter>
+            <meta-data android:name="android.appwidget.provider"
+                android:resource="@xml/my_widget_provider"/>
+        </receiver>
     </application>
 
     // Specify requirement for OpenGL ES version 2

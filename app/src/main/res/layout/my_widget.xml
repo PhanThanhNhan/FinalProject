@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:orientation="horizontal"
+        android:weightSum="5">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:gravity="center">
+            <ImageView
+                android:id="@+id/ivWidgetWeatherIcon"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:background="@drawable/cloudytest"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:orientation="vertical"
+            android:gravity="center_vertical">
+            <TextView
+                android:id="@+id/tvWidgetTemperature"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="25 C"
+                android:textSize="30dp"
+                android:layout_gravity="top|center"/>
+            <TextView
+                android:id="@+id/tvWidgetDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sunny" />
+            <TextView
+                android:id="@+id/tvWidgetPressure"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pressure: 1000 hPa" />
+            <TextView
+                android:id="@+id/tvWidgetHumidity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Humidity: 85%" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:weightSum="3"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnWidgetPrevious"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="Back"/>
+        <TextView
+            android:id="@+id/tvWidgetDay"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="Today"
+            android:textSize="25dp"
+            android:gravity="center">
+        </TextView>
+        <Button
+            android:id="@+id/btnWidgetNext"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="Next"/>
+    </LinearLayout>
+
+</LinearLayout>
