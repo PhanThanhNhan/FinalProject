@@ -23,6 +23,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.youneverknow.finalproject.DataClass.dataFor10days;
+import com.example.youneverknow.finalproject.MainActivity;
 import com.example.youneverknow.finalproject.R;
 
 import java.util.ArrayList;
@@ -75,7 +77,17 @@ public class ContactActivity extends Activity implements View.OnClickListener, L
         smsIntent.setData(Uri.parse("smsto:"));
         smsIntent.setType("vnd.android-dir/mms-sms");
         smsIntent.putExtra("address", phoneNum[position + 1]);
-        smsIntent.putExtra("sms_body", "It seems to be hot today, take care of yourself buddy :D ");
+
+        String message;
+        if(AutoDetectActivity.isCalculated && dataFor10days.data[0].temperature < 293)
+            message = "Its about " + String.valueOf(AutoDetectActivity.curTemperature - 273) + " degree. Gonna be cold today!";
+        else if(AutoDetectActivity.isCalculated&& dataFor10days.data[0].temperature < 303)
+            message = "Its about " + String.valueOf(AutoDetectActivity.curTemperature - 273) + " degree. How about a picnic?";
+        else if(AutoDetectActivity.isCalculated)
+            message = "Its about " + String.valueOf(AutoDetectActivity.curTemperature - 273) + " degree. Gonna be hot. Take care of yourself buddy!";
+        else message = "Hi buddy! Long time no see";
+
+        smsIntent.putExtra("sms_body", message);
 
         try {
             startActivity(smsIntent);
@@ -178,5 +190,23 @@ public class ContactActivity extends Activity implements View.OnClickListener, L
             }
             return list;
         }
+    }
+
+    String round2decimal(String number){
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < number.length(); i++){
+            if(number.charAt(i) == '.'){
+                stringBuilder.append(number.charAt(i));
+                stringBuilder.append(number.charAt(i + 1));
+                if(i + 2 >= number.length())
+                    stringBuilder.append("0");
+                else
+                    stringBuilder.append(number.charAt(i + 2));
+
+                break;
+            }
+            stringBuilder.append(number.charAt(i));
+        }
+        return stringBuilder.toString();
     }
 }

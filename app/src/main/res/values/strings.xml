@@ -8,6 +8,9 @@
     <string name="main_EnterLocation">Enter Location</string>
     <string name="main_ChooseOnMap">Choose on Map</string>
     <string name="main_Settings">Settings</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+
+    <string name="hello_world">Hello world!</string>
 
 
 </resources>

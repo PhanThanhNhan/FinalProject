@@ -1,5 +1,8 @@
 package com.example.youneverknow.finalproject.AutoDetect.Adapter;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -9,6 +12,7 @@ import android.support.v4.view.ViewCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -54,7 +58,7 @@ public class SuperAwesomeCardFragment extends Fragment{
     private TextView tvAutoDetectTodayTemperature, tvAutoDetectTodayDescription, tvAutoDetectTodayPressure,
             tvAutoDetectTodayHumidity, tvAutoDetectTodayWind, tvAutoDetectTodayCityName, tvAutoDetectTodaySunrise, tvAutoDetectTodaySunset;
     private ImageView ivAutoDetectTodayWeatherIcon;
-    private FloatingActionButton fbtnShareFacebook, fbtnShareSMS;
+    private ImageButton ibtnAutoDetectSMS;
 
     private int position;
 
@@ -88,15 +92,8 @@ public class SuperAwesomeCardFragment extends Fragment{
             tvAutoDetectTodaySunset = (TextView) rootView.findViewById(R.id.tvAutoDetectTodaySunset);
             ivAutoDetectTodayWeatherIcon = (ImageView) rootView.findViewById(R.id.ivAutoDetectTodayWeatherIcon);
 
-            fbtnShareFacebook = (FloatingActionButton) rootView.findViewById(R.id.fbtnShareFacebook);
-            fbtnShareFacebook.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Toast.makeText(v.getContext(), "FaceBook", Toast.LENGTH_SHORT).show();
-                }
-            });
-            fbtnShareSMS = (FloatingActionButton) rootView.findViewById(R.id.fbtnShareSMS);
-            fbtnShareSMS.setOnClickListener(new View.OnClickListener() {
+            ibtnAutoDetectSMS = (ImageButton) rootView.findViewById(R.id.ibtnAutoDetectShareSMS);
+            ibtnAutoDetectSMS.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent i = new Intent(getActivity(), ContactActivity.class );
@@ -163,7 +160,6 @@ public class SuperAwesomeCardFragment extends Fragment{
         ViewCompat.setElevation(rootView, 50);
         return rootView;
     }
-
 
 
     ///////////////////////////////////////////////////////////////////////////////////////

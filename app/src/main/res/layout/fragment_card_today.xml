@@ -147,51 +147,21 @@
                                 android:textSize="15dp"
                                 android:layout_gravity="right"/>
                         </LinearLayout>
-
                     </LinearLayout>
-
                 </LinearLayout>
-
                 <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_weight="2"
-                        >
-
-                    <com.getbase.floatingactionbutton.FloatingActionsMenu
-                            android:id="@+id/fbtnMain"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentTop="true"
-                            android:layout_alignParentRight="true"
-                            fab:fab_addButtonColorNormal="@color/white"
-                            fab:fab_addButtonColorPressed="@color/white_pressed"
-                            fab:fab_addButtonSize="normal"
-                            fab:fab_addButtonPlusIconColor="@color/half_black"
-                            fab:fab_addButtonStrokeVisible="false"
-                            fab:fab_expandDirection="left"
-                            android:layout_gravity="right">
-
-                        <com.getbase.floatingactionbutton.FloatingActionButton
-                                android:id="@+id/fbtnShareFacebook"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                fab:fab_colorNormal="@color/white"
-                                fab:fab_colorPressed="@color/white_pressed"
-                                fab:fab_size="normal"/>
-
-                        <com.getbase.floatingactionbutton.FloatingActionButton
-                            android:id="@+id/fbtnShareSMS"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                fab:fab_colorNormal="@color/white"
-                                fab:fab_colorPressed="@color/white_pressed"
-                                fab:fab_size="normal"/>
-
-                    </com.getbase.floatingactionbutton.FloatingActionsMenu>
-
+                        android:layout_weight="2">
+                   <ImageButton
+                       android:id="@+id/ibtnAutoDetectShareSMS"
+                       android:layout_width="50dp"
+                       android:layout_height="50dp"
+                       android:background="@drawable/message"
+                       android:layout_alignParentRight="true"
+                       android:layout_alignParentBottom="true"
+                       android:layout_marginBottom="10dp"/>
                 </RelativeLayout>
-
             </LinearLayout>
             <LinearLayout
                 android:layout_width="0dp"

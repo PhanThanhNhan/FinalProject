@@ -1,40 +1,50 @@
 package com.example.youneverknow.finalproject;
 
-import android.app.Activity;
+import android.app.Fragment;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.net.wifi.WifiManager;
 import android.os.Handler;
-import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.avast.android.dialogs.fragment.SimpleDialogFragment;
 import com.dd.CircularProgressButton;
 import com.example.youneverknow.finalproject.AsyncTask.getWeatherUsingCoordinate;
-import com.example.youneverknow.finalproject.AutoDetect.AutoDetectActivity;
 import com.example.youneverknow.finalproject.AutoDetect.getLocation;
 import com.example.youneverknow.finalproject.ChooseOnMap.ChooseOnMapActivity;
-import com.example.youneverknow.finalproject.DataClass.dataFor10daysNode;
 import com.example.youneverknow.finalproject.EnterLocation.EnterLocationActivity;
-import com.example.youneverknow.finalproject.Settings.SettingActivity;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 
-public class MainActivity extends FragmentActivity {
+public class MainActivity extends AppCompatActivity {
 
     private CircularProgressButton btnMainAutoDetect, btnMainEnterLocation, btnMainChooseOnMap, btnMainSettings;;
+    public static boolean isButtonPressed = false;
 
     public static double curLatitude, curLongitude;
     private final int CHOOSE_ON_MAP_RESULT_CODE = 1;
     private final int ENTER_LOCATION_RESULT_CODE = 2;
     public boolean isLocationGotten = false;
 
+    DrawerLayout drawerLayout;
+    Toolbar toolbar;
+    ActionBar actionBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +52,21 @@ public class MainActivity extends FragmentActivity {
         setContentView(R.layout.activity_main);
         getControl();
         setButtonClickEvents();
+
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        actionBar = getSupportActionBar();
+        actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
+        drawerLayout = (DrawerLayout) findViewById(R.id.navigation_drawer_layout);
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
+        if (navigationView != null) {
+            setupNavigationDrawerContent(navigationView);
+        }
+
     }
 
     public void getControl(){
@@ -62,10 +87,10 @@ public class MainActivity extends FragmentActivity {
                 Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
                     public void run() {
-                        if(isLocationGotten){
+                        if (isLocationGotten) {
                             ConnectivityManager connManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
                             NetworkInfo mWifi = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
-                            if (!mWifi.isConnected()){
+                            if (!mWifi.isConnected()) {
                                 Toast.makeText(getApplicationContext(), "No Internet connection", Toast.LENGTH_LONG).show();
                                 btnMainAutoDetect.setProgress(0);
                                 btnMainAutoDetect.setIdleText("Retry");
@@ -74,8 +99,8 @@ public class MainActivity extends FragmentActivity {
                             btnMainAutoDetect.setProgress(100);
                             getWeatherUsingCoordinate weatherAsyncTask = new getWeatherUsingCoordinate(MainActivity.this, curLatitude, curLongitude, true);
                             weatherAsyncTask.execute();
-                        }
-                        else {
+                            isButtonPressed = true;
+                        } else {
                             Toast.makeText(getApplicationContext(), "GPS location not found", Toast.LENGTH_LONG).show();
                             btnMainAutoDetect.setProgress(-1);
                             Handler handler = new Handler();
@@ -98,6 +123,7 @@ public class MainActivity extends FragmentActivity {
             public void onClick(View v) {
                 Intent iGo = new Intent(v.getContext(), EnterLocationActivity.class);
                 startActivityForResult(iGo, ENTER_LOCATION_RESULT_CODE);
+                isButtonPressed = false;
             }
         });
 
@@ -106,14 +132,14 @@ public class MainActivity extends FragmentActivity {
             public void onClick(View v) {
                 Intent iGo = new Intent(v.getContext(), ChooseOnMapActivity.class);
                 startActivityForResult(iGo, CHOOSE_ON_MAP_RESULT_CODE);
+                isButtonPressed = false;
             }
         });
 
         btnMainSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent iGo = new Intent(v.getContext(), SettingActivity.class);
-                startActivity(iGo);
+                Toast.makeText(MainActivity.this, "Function uncompleted", Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -165,5 +191,79 @@ public class MainActivity extends FragmentActivity {
                 }, 1000);
             }
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                drawerLayout.openDrawer(GravityCompat.START);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void setupNavigationDrawerContent(NavigationView navigationView) {
+        navigationView.setNavigationItemSelectedListener(
+                new NavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(MenuItem menuItem) {
+                        switch (menuItem.getItemId()) {
+
+                            case R.id.item_navigation_drawer_sent_mail:
+                                menuItem.setChecked(true);
+                                drawerLayout.closeDrawer(GravityCompat.START);
+                                showAboutDialog(HELP_DIALOG);
+                                return true;
+                            case R.id.item_navigation_drawer_drafts:
+                                menuItem.setChecked(true);
+                                drawerLayout.closeDrawer(GravityCompat.START);
+                                showAboutDialog(ABOUT_DIALOG);
+                                return true;
+                            case R.id.item_navigation_drawer_settings:
+                                menuItem.setChecked(true);;
+                                drawerLayout.closeDrawer(GravityCompat.START);
+                                showAboutDialog(SETTING_DIALOG);
+                                return true;
+                            case R.id.item_navigation_drawer_help_and_feedback:
+                                finish();
+                                return true;
+                        }
+                        return true;
+                    }
+                });
+    }
+
+    private final String ABOUT_DIALOG = "1";
+    private final String HELP_DIALOG = "2";
+    private final String SETTING_DIALOG = "3";
+
+    public void showAboutDialog(String type){
+        String message = "";
+        String title = "Let's weather";
+        switch (type){
+            case ABOUT_DIALOG:
+                message = "Let's weather is a weather forecast application.";
+                break;
+            case HELP_DIALOG:
+                message = "Please look at the tutorial.";
+                break;
+            case SETTING_DIALOG:
+                title = "Oops sorry!";
+                message = "Function coming soon.";
+                break;
+        }
+        SimpleDialogFragment.createBuilder(this, getSupportFragmentManager())
+                .setTitle(title)
+                .setMessage(message)
+                .setPositiveButtonText("OK")
+                .show();
     }
 }

@@ -104,7 +104,7 @@ public class getLocation extends Service implements LocationListener {
 
     public void showSettingsAlert(){
         AlertDialog.Builder alerBuilder = new AlertDialog.Builder(context);
-        alerBuilder.setTitle("GPS is setting");
+        alerBuilder.setTitle("GPS");
         alerBuilder.setMessage("GPS is not enabled. Do you want to go to settings menu?");
         alerBuilder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override

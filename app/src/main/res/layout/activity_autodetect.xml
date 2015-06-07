@@ -21,8 +21,6 @@
             android:text="New York"
             android:paddingTop="10dp"
             android:paddingLeft="20dp"/>
-
-
     </RelativeLayout>
 
     <com.astuetz.PagerSlidingTabStrip

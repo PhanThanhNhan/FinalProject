@@ -9,22 +9,11 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
-import java.util.ArrayList;
 import java.util.List;
-import android.content.Context;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.ListFragment;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.AsyncTaskLoader;
-import android.support.v4.content.Loader;
-import android.util.Log;
 import android.widget.Toast;
-
 
 import com.example.youneverknow.finalproject.MainActivity;
 import com.example.youneverknow.finalproject.R;
-
-import java.util.List;
 
 
 /**
