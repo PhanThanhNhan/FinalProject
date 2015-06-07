@@ -19,8 +19,7 @@
             <ImageView
                 android:id="@+id/ivWidgetWeatherIcon"
                 android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:background="@drawable/cloudytest"/>
+                android:layout_height="100dp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -33,24 +32,23 @@
                 android:id="@+id/tvWidgetTemperature"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="25 C"
                 android:textSize="30dp"
                 android:layout_gravity="top|center"/>
             <TextView
                 android:id="@+id/tvWidgetDescription"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Sunny" />
+                android:layout_gravity="center"/>
             <TextView
                 android:id="@+id/tvWidgetPressure"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Pressure: 1000 hPa" />
+                android:layout_gravity="center"/>
             <TextView
                 android:id="@+id/tvWidgetHumidity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Humidity: 85%" />
+                android:layout_gravity="center"/>
 
         </LinearLayout>
 
@@ -60,30 +58,14 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="2"
-        android:weightSum="3"
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/btnWidgetPrevious"
-            android:layout_weight="1"
-            android:layout_width="0dp"
+            android:id="@+id/btnWidgetRefresh"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Back"/>
-        <TextView
-            android:id="@+id/tvWidgetDay"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:text="Today"
-            android:textSize="25dp"
-            android:gravity="center">
-        </TextView>
-        <Button
-            android:id="@+id/btnWidgetNext"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:text="Next"/>
+            android:text="Refresh"
+            android:gravity="center"/>
     </LinearLayout>
 
 </LinearLayout>

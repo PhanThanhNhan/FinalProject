@@ -30,6 +30,7 @@ public class AutoDetectActivity extends FragmentActivity{
 
     public static boolean isCalculated = false;
     public static int curTemperature;
+    public static String curDescription;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,9 +43,10 @@ public class AutoDetectActivity extends FragmentActivity{
         if (MainActivity.isButtonPressed){
             isCalculated = true;
             curTemperature = (int) dataFor10days.data[0].temperature;
-
+            curDescription = dataFor10days.data[0].description;
             setNotification();
         }
+
     }
 
 
@@ -57,19 +59,14 @@ public class AutoDetectActivity extends FragmentActivity{
     }
 
     public void setNotification(){
-        // Prepare intent which is triggered if the
-        // notification is selected
         Intent intent = new Intent(this, MainActivity.class);
         PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent, 0);
 
-        // Build notification
-        // Actions are just fake
         Notification noti = new Notification.Builder(this)
                 .setContentTitle(formalString(dataFor10days.data[0].description))
-                .setContentText(round2decimal(round2decimal(String.valueOf((dataFor10days.data[0].temperature - 273)))) + (char) 0x00B0 + "C" ).setSmallIcon(R.drawable.cloudytest)
+                .setContentText(round2decimal(round2decimal(String.valueOf((dataFor10days.data[0].temperature - 273)))) + (char) 0x00B0 + "C" ).setSmallIcon(getIcon(curDescription, curTemperature))
                 .setContentIntent(pIntent).build();
         NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        // hide the notification after its selected
         noti.flags |= Notification.FLAG_NO_CLEAR;
 
         notificationManager.notify(0, noti);
@@ -106,6 +103,28 @@ public class AutoDetectActivity extends FragmentActivity{
             stringBuilder.append(str.charAt(i));
         }
         return stringBuilder.toString();
+    }
+
+    int getIcon(String description, double temperature){
+        if(description.toLowerCase().contains("clear"))
+        {
+            if(temperature < 10)
+                return R.drawable.snow4;
+            if (temperature < 30)
+                return R.drawable.fog;
+            else
+                return R.drawable.sunny;
+        }
+
+        if(description.toLowerCase().contains("sunny"))
+            return R.drawable.cloudy1;
+        if(description.toLowerCase().contains("cloud"))
+            return R.drawable.cloudy5;
+        if(description.toLowerCase().contains("rain"))
+            return R.drawable.light_rain;
+        if(description.toLowerCase().contains("snow"))
+            return R.drawable.snow4;
+        return R.drawable.dunno;
     }
 
 }

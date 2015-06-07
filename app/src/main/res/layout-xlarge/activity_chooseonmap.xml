@@ -21,24 +21,24 @@ tools:context=".MapActivity" >
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="100dp"
         android:background="@color/green">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Choose a location"
             android:textColor="@android:color/white"
-            android:textSize="20dp"
-            android:layout_marginTop="35dp"
-            android:layout_marginLeft="10dp" />
+            android:textSize="40dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginLeft="30dp" />
 
         <ImageButton
             android:id="@+id/ibtnChooseOnMapOK"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_alignParentRight="true"
-            android:layout_marginTop="30dp"
-            android:layout_marginRight="20dp"
+            android:layout_marginTop="35dp"
+            android:layout_marginRight="30dp"
             android:background="@drawable/ic_action_accept"/>
     </RelativeLayout>
 </FrameLayout>

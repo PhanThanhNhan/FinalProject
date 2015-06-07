@@ -3,13 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    android:paddingLeft="5dp"
     tools:context=".MainActivity"
     android:baselineAligned="false" >
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
+        android:layout_height="80dp"
         android:background="@color/green"
         android:id="@+id/relativeLayout">
         <TextView
@@ -19,7 +18,7 @@
             android:textSize="25dp"
             android:textColor="@android:color/white"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="35dp"
             />
     </RelativeLayout>
 

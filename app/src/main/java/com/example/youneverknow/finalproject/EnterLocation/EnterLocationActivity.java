@@ -1,7 +1,10 @@
 package com.example.youneverknow.finalproject.EnterLocation;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
@@ -12,6 +15,7 @@ import android.widget.ListView;
 import java.util.List;
 import android.widget.Toast;
 
+import com.avast.android.dialogs.fragment.SimpleDialogFragment;
 import com.example.youneverknow.finalproject.MainActivity;
 import com.example.youneverknow.finalproject.R;
 
@@ -72,6 +76,13 @@ public class EnterLocationActivity extends FragmentActivity {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
 
+                ConnectivityManager connManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+                NetworkInfo mWifi = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+                if (!mWifi.isConnected()) {
+                    Toast.makeText(getApplicationContext(), "Turn on your internet connection", Toast.LENGTH_LONG).show();
+                    return true;
+                }
+
                 MainActivity.curLatitude = getLat(citiesCoordinate[position]);
                 MainActivity.curLongitude = getLon(citiesCoordinate[position]);
 
@@ -100,6 +111,14 @@ public class EnterLocationActivity extends FragmentActivity {
                     myAutoComplete.requestFocus();
                     return;
                 }
+
+                ConnectivityManager connManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+                NetworkInfo mWifi = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+                if (!mWifi.isConnected()) {
+                    Toast.makeText(getApplicationContext(), "Turn on your internet connection", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
                 MainActivity.curLatitude = getLat(citiesCoordinate[pos]);
                 MainActivity.curLongitude = getLon(citiesCoordinate[pos]);
 

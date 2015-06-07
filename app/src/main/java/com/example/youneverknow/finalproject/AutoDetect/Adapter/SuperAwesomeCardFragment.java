@@ -111,7 +111,7 @@ public class SuperAwesomeCardFragment extends Fragment{
             tvAutoDetectTodayWind.setText("Wind: " + dataFor10days.data[0].wind + " m/s");
             tvAutoDetectTodaySunrise.setText("Sunrise: " + dataFor10days.sunRise);
             tvAutoDetectTodaySunset.setText("Sunset: " + dataFor10days.sunSet);
-            ivAutoDetectTodayWeatherIcon.setImageResource(R.drawable.cloudytest);
+            ivAutoDetectTodayWeatherIcon.setImageResource(getIcon(dataFor10days.data[0].description, dataFor10days.data[0].temperature - 273));
 
         }
         else if (position == 1){
@@ -151,7 +151,7 @@ public class SuperAwesomeCardFragment extends Fragment{
 
             tvAutoDetect10daysTemperature.setText("");
             tvAutoDetect10daysDescription.setText("");
-            tvAutoDetect10daysPressure.setText("You can tap a column");
+            tvAutoDetect10daysPressure.setText("Tap a column to view");
             tvAutoDetect10daysHumidity.setText("");
             tvAutoDetect10daysWind.setText("");
             tvAutoDetect10daysTime.setText("");
@@ -301,7 +301,7 @@ public class SuperAwesomeCardFragment extends Fragment{
             tvAutoDetect5daysPressure.setText("Pressure: " + dataFor10days.data[columnIndex].pressure + " hPa");
             tvAutoDetect5daysHumidity.setText("Humidity: " + dataFor10days.data[columnIndex].humidity + "%");
             tvAutoDetect5daysWind.setText("Wind: " + dataFor10days.data[columnIndex].wind + " m/s");
-            ivAutoDetect5daysWeatherIcon.setImageResource(R.drawable.cloudytest);
+            ivAutoDetect5daysWeatherIcon.setImageResource(getIcon(dataFor10days.data[columnIndex].description, dataFor10days.data[columnIndex].temperature - 273));
             if(columnIndex == 0)
                 tvAutoDetect5daysTime.setText("Today");
             else tvAutoDetect5daysTime.setText("Day " + columnIndex);
@@ -355,7 +355,7 @@ public class SuperAwesomeCardFragment extends Fragment{
             tvAutoDetect5daysPressure.setText("Pressure: " + dataFor5days.data[columnSelectedIndex].time[i1].pressure + " hPa");
             tvAutoDetect5daysHumidity.setText("Humidity: " + dataFor5days.data[columnSelectedIndex].time[i1].humidity + "%");
             tvAutoDetect5daysWind.setText("Wind: " + dataFor5days.data[columnSelectedIndex].time[i1].wind + " m/s");
-            ivAutoDetect5daysWeatherIcon.setImageResource(R.drawable.cloudytest);
+            ivAutoDetect5daysWeatherIcon.setImageResource(getIcon(dataFor5days.data[columnSelectedIndex].time[i1].description, dataFor5days.data[columnSelectedIndex].time[i1].temperature - 273));
             if(columnSelectedIndex == 0)
                 tvAutoDetect5daysTime.setText("Today: " + tempTime);
             else tvAutoDetect5daysTime.setText("Day " + columnSelectedIndex + ": " + tempTime);
@@ -508,7 +508,7 @@ public class SuperAwesomeCardFragment extends Fragment{
             tvAutoDetect10daysPressure.setText("Pressure: " + dataFor10days.data[columnIndex].pressure + " hPa");
             tvAutoDetect10daysHumidity.setText("Humidity: " + dataFor10days.data[columnIndex].humidity + "%");
             tvAutoDetect10daysWind.setText("Wind: " + dataFor10days.data[columnIndex].wind + " m/s");
-            ivAutoDetect10daysWeatherIcon.setImageResource(R.drawable.cloudytest);
+            ivAutoDetect10daysWeatherIcon.setImageResource(getIcon(dataFor10days.data[columnIndex].description, dataFor10days.data[columnIndex].temperature - 273));
             if(columnIndex == 0)
                 tvAutoDetect10daysTime.setText("Today");
             else tvAutoDetect10daysTime.setText("Day " + columnIndex);
@@ -527,7 +527,7 @@ public class SuperAwesomeCardFragment extends Fragment{
             tvAutoDetect10daysPressure.setText("Pressure: " + dataFor10days.data[i1].pressure + " hPa");
             tvAutoDetect10daysHumidity.setText("Humidity: " + dataFor10days.data[i1].humidity + "%");
             tvAutoDetect10daysWind.setText("Wind: " + dataFor10days.data[i1].wind + " m/s");
-            ivAutoDetect10daysWeatherIcon.setImageResource(R.drawable.cloudytest);
+            ivAutoDetect10daysWeatherIcon.setImageResource(getIcon(dataFor10days.data[i1].description, dataFor10days.data[i1].temperature - 273));
             if(i1 == 0)
                 tvAutoDetect10daysTime.setText("Today");
             else tvAutoDetect10daysTime.setText("Day " + i1);
@@ -571,5 +571,27 @@ public class SuperAwesomeCardFragment extends Fragment{
             stringBuilder.append(str.charAt(i));
         }
         return stringBuilder.toString();
+    }
+
+    int getIcon(String description, double temperature){
+        if(description.toLowerCase().contains("clear"))
+        {
+            if(temperature < 10)
+                return R.drawable.snow4;
+            if (temperature < 30)
+                return R.drawable.fog;
+            else
+                return R.drawable.sunny;
+        }
+
+        if(description.toLowerCase().contains("sunny"))
+            return R.drawable.cloudy1;
+        if(description.toLowerCase().contains("cloud"))
+            return R.drawable.cloudy5;
+        if(description.toLowerCase().contains("rain"))
+            return R.drawable.light_rain;
+        if(description.toLowerCase().contains("snow"))
+            return R.drawable.snow4;
+        return R.drawable.dunno;
     }
 }

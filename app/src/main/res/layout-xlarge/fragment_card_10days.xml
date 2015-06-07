@@ -50,8 +50,7 @@
                             android:id="@+id/tvAutoDetect16daysTime"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Time: ---"
-                            android:textSize="15dp"/>
+                            android:textSize="30dp"/>
 
                     </LinearLayout>
                     <LinearLayout
@@ -63,36 +62,32 @@
                             android:id="@+id/tvAutoDetect16daysTemperature"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="---"
-                            android:textSize="25dp"
+                            android:textSize="50dp"
+                            android:layout_marginTop="40dp"
                             android:layout_gravity="center"/>
                         <TextView
                             android:id="@+id/tvAutoDetect16daysDescription"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Weather: ---"
-                            android:textSize="15dp"
+                            android:textSize="30dp"
                             android:layout_gravity="left"/>
                         <TextView
                             android:id="@+id/tvAutoDetect16daysPressure"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Pressure: ---"
-                            android:textSize="15dp"
+                            android:textSize="30dp"
                             android:layout_gravity="left"/>
                         <TextView
                             android:id="@+id/tvAutoDetect16daysHumidity"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Humidity: ---"
-                            android:textSize="15dp"
+                            android:textSize="30dp"
                             android:layout_gravity="left"/>
                         <TextView
                             android:id="@+id/tvAutoDetect16daysWind"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Wind: ---"
-                            android:textSize="15dp"
+                            android:textSize="30dp"
                             android:layout_gravity="left"/>
                     </LinearLayout>
 

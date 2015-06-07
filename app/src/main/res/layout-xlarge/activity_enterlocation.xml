@@ -6,7 +6,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="100dp"
         android:background="@color/pink_lable">
         <com.example.youneverknow.finalproject.EnterLocation.CustomAutoCompleteView
             android:id="@+id/myautocomplete"
@@ -17,7 +17,8 @@
             android:textColorHint="@android:color/white"
             android:textColor="@android:color/white"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="35dp">
+            android:layout_marginTop="30dp"
+            android:textSize="40dp">
         </com.example.youneverknow.finalproject.EnterLocation.CustomAutoCompleteView>
 
         <ImageButton
@@ -26,7 +27,7 @@
             android:layout_height="40dp"
             android:layout_alignParentRight="true"
             android:layout_marginRight="20dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="40dp"
             android:background="@drawable/ic_action_accept"/>
 
     </RelativeLayout>

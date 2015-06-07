@@ -5,11 +5,11 @@
 
         <item
             android:id="@+id/item_navigation_drawer_sent_mail"
-            android:icon="@drawable/ic_action_content_send"
-            android:title="Help" />
+            android:icon="@drawable/ic_help"
+            android:title="How to use" />
         <item
             android:id="@+id/item_navigation_drawer_drafts"
-            android:icon="@drawable/ic_action_content_drafts"
+            android:icon="@drawable/ic_about"
             android:title="About" />
     </group>
 
@@ -17,11 +17,11 @@
         <menu>
             <item
                 android:id="@+id/item_navigation_drawer_settings"
-                android:icon="@drawable/ic_action_content_mail"
+                android:icon="@drawable/ic_settings"
                 android:title="Settings" />
             <item
                 android:id="@+id/item_navigation_drawer_help_and_feedback"
-                android:icon="@drawable/ic_action_action_delete"
+                android:icon="@drawable/ic_exit"
                 android:title="Exit" />
         </menu>
     </item>

@@ -6,6 +6,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Handler;
@@ -21,6 +22,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,6 +33,9 @@ import com.example.youneverknow.finalproject.AsyncTask.getWeatherUsingCoordinate
 import com.example.youneverknow.finalproject.AutoDetect.getLocation;
 import com.example.youneverknow.finalproject.ChooseOnMap.ChooseOnMapActivity;
 import com.example.youneverknow.finalproject.EnterLocation.EnterLocationActivity;
+import com.github.amlcurran.showcaseview.OnShowcaseEventListener;
+import com.github.amlcurran.showcaseview.ShowcaseView;
+import com.github.amlcurran.showcaseview.targets.ViewTarget;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -41,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
     private final int CHOOSE_ON_MAP_RESULT_CODE = 1;
     private final int ENTER_LOCATION_RESULT_CODE = 2;
     public boolean isLocationGotten = false;
+    private String spMainTut = "spMainTut";
 
     DrawerLayout drawerLayout;
     Toolbar toolbar;
@@ -65,8 +72,7 @@ public class MainActivity extends AppCompatActivity {
         NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
         if (navigationView != null) {
             setupNavigationDrawerContent(navigationView);
-        }
-
+        };
     }
 
     public void getControl(){
@@ -96,7 +102,6 @@ public class MainActivity extends AppCompatActivity {
                                 btnMainAutoDetect.setIdleText("Retry");
                                 return;
                             }
-                            btnMainAutoDetect.setProgress(100);
                             getWeatherUsingCoordinate weatherAsyncTask = new getWeatherUsingCoordinate(MainActivity.this, curLatitude, curLongitude, true);
                             weatherAsyncTask.execute();
                             isButtonPressed = true;
@@ -220,7 +225,7 @@ public class MainActivity extends AppCompatActivity {
                             case R.id.item_navigation_drawer_sent_mail:
                                 menuItem.setChecked(true);
                                 drawerLayout.closeDrawer(GravityCompat.START);
-                                showAboutDialog(HELP_DIALOG);
+                                tutorial();
                                 return true;
                             case R.id.item_navigation_drawer_drafts:
                                 menuItem.setChecked(true);
@@ -265,5 +270,74 @@ public class MainActivity extends AppCompatActivity {
                 .setMessage(message)
                 .setPositiveButtonText("OK")
                 .show();
+    }
+
+    private void tutorial(){
+        ViewTarget target = new ViewTarget(R.id.btnMainAutoDetect, this);
+        String title = "Auto Detect";
+        String message = "Click this button will automatically detect your location. Then search for weather info";
+        ShowcaseView sv = setupShowcase(target, title, message);
+        sv.setOnShowcaseEventListener(new OnShowcaseEventListener() {
+            @Override
+            public void onShowcaseViewHide(ShowcaseView showcaseView) {
+                ViewTarget target = new ViewTarget(R.id.btnMainEnterLocation, MainActivity.this);
+                String title = "Enter Location";
+                String message = "There 's a listview and edittext. Long tap on list item to search or enter city name on TextField ";
+                ShowcaseView sv = setupShowcase(target, title, message);
+                sv.setOnShowcaseEventListener(new OnShowcaseEventListener() {
+                    @Override
+                    public void onShowcaseViewHide(ShowcaseView showcaseView) {
+                        ViewTarget target = new ViewTarget(R.id.btnMainChooseOnMap, MainActivity.this);
+                        String title = "Choose on map";
+                        String message = "Choose a location on our map to see its weather";
+                        ShowcaseView sv = setupShowcase(target, title, message);
+                        sv.setOnShowcaseEventListener(new OnShowcaseEventListener() {
+                            @Override
+                            public void onShowcaseViewHide(ShowcaseView showcaseView) {
+                                ViewTarget target = new ViewTarget(R.id.btnMainSettings, MainActivity.this);
+                                String title = "Settings";
+                                String message = "Setting to make app more easier";
+                                setupShowcase(target, title, message);
+                            }
+
+                            @Override
+                            public void onShowcaseViewDidHide(ShowcaseView showcaseView) {
+
+                            }
+
+                            @Override
+                            public void onShowcaseViewShow(ShowcaseView showcaseView) {
+
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onShowcaseViewDidHide(ShowcaseView showcaseView) {}
+
+                    @Override
+                    public void onShowcaseViewShow(ShowcaseView showcaseView) {}
+                });
+            }
+
+            @Override
+            public void onShowcaseViewDidHide(ShowcaseView showcaseView) {
+            }
+
+            @Override
+            public void onShowcaseViewShow(ShowcaseView showcaseView) {
+            }
+        });
+    }
+
+    private ShowcaseView setupShowcase(ViewTarget target, String title, String message){
+            ShowcaseView sv = new ShowcaseView.Builder(this)
+                    .setTarget(target)
+                    .setContentTitle(title)
+                    .setContentText(message)
+                    .setStyle(R.style.CustomShowcaseTheme2)
+                    .hideOnTouchOutside()
+                    .build();
+        return sv;
     }
 }

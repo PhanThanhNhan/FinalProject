@@ -3,6 +3,8 @@ package com.example.youneverknow.finalproject.ChooseOnMap;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.FragmentActivity;
@@ -60,6 +62,13 @@ public class ChooseOnMapActivity extends FragmentActivity {
                 googleMap.clear();
                 marker = googleMap.addMarker(new MarkerOptions().position(latLng));
 
+                ConnectivityManager connManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+                NetworkInfo mWifi = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+                if (!mWifi.isConnected()) {
+                    Toast.makeText(getApplicationContext(), "Turn on your internet connection", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
                 MainActivity.curLatitude = marker.getPosition().latitude;
                 MainActivity.curLongitude = marker.getPosition().longitude;
 
@@ -80,6 +89,14 @@ public class ChooseOnMapActivity extends FragmentActivity {
         ibtnChooseOnMapOK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                ConnectivityManager connManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+                NetworkInfo mWifi = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+                if (!mWifi.isConnected()) {
+                    Toast.makeText(getApplicationContext(), "Turn on your internet connection", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
                 MainActivity.curLatitude = marker.getPosition().latitude;
                 MainActivity.curLongitude = marker.getPosition().longitude;
 

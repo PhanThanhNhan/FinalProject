@@ -365,9 +365,6 @@ public class getWeatherUsingCoordinate extends AsyncTask<Void, Void, Void>{
                 }
             }
         }
-
-
-        int a = 0;
     }
 
 }

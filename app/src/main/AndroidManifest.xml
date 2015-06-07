@@ -9,8 +9,6 @@
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="ANDROID.PERMISSION.SEND_SMS" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     // Specify requirement for OpenGL ES version 2
     <uses-feature
         android:glEsVersion="0x00020000"
@@ -26,7 +24,7 @@
             android:value="@integer/google_play_services_version" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyD6gwhXkJNieLQPvzwodgw-9O9cdtNdmvQ" />
+            android:value="AIzaSyB4GpB_fWRIpHN9mmYvALCdCBAoZyDv2iQ" />
 
         <activity
             android:name=".MainActivity"
@@ -37,7 +35,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AutoDetect.AutoDetectActivity" />
+        <activity android:name=".AutoDetect.AutoDetectActivity"
+            android:screenOrientation="portrait"/>
         <activity android:name=".EnterLocation.EnterLocationActivity" />
         <activity android:name=".ChooseOnMap.ChooseOnMapActivity" />
         <activity android:name=".Settings.SettingActivity" />
