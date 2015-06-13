@@ -33,6 +33,7 @@
             app:theme="@style/ToolbarTheme" />
 
         <LinearLayout
+            android:id="@+id/linearLayoutMainContainer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="?attr/actionBarSize"

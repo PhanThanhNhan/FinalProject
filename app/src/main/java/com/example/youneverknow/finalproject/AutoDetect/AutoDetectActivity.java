@@ -49,8 +49,6 @@ public class AutoDetectActivity extends FragmentActivity{
 
     }
 
-
-
     public void setTabLayout(){
         ViewPager pager = (ViewPager) findViewById(R.id.pager);
         pager.setAdapter(new MyPagerAdapter(getSupportFragmentManager()));
@@ -115,7 +113,6 @@ public class AutoDetectActivity extends FragmentActivity{
             else
                 return R.drawable.sunny;
         }
-
         if(description.toLowerCase().contains("sunny"))
             return R.drawable.cloudy1;
         if(description.toLowerCase().contains("cloud"))
@@ -126,5 +123,4 @@ public class AutoDetectActivity extends FragmentActivity{
             return R.drawable.snow4;
         return R.drawable.dunno;
     }
-
 }

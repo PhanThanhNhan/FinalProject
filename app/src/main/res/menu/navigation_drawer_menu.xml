@@ -1,26 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group android:checkableBehavior="single">
-
-        <item
-            android:id="@+id/item_navigation_drawer_sent_mail"
-            android:icon="@drawable/ic_help"
-            android:title="How to use" />
-        <item
-            android:id="@+id/item_navigation_drawer_drafts"
-            android:icon="@drawable/ic_about"
-            android:title="About" />
-    </group>
-
-    <item android:title="Subheader">
+    <item android:title="History">
         <menu>
+            <item
+                android:id="@+id/item_navigation_drawer_lastCheck"
+                android:icon="@drawable/ic_help"
+                android:title="Last Check" />
+        </menu>
+    </item>
+
+    <item android:title="">
+        <menu>
+            <item
+                android:id="@+id/item_navigation_drawer_howtouse"
+                android:icon="@drawable/ic_help"
+                android:title="How to use" />
+            <item
+                android:id="@+id/item_navigation_drawer_about"
+                android:icon="@drawable/ic_about"
+                android:title="About" />
             <item
                 android:id="@+id/item_navigation_drawer_settings"
                 android:icon="@drawable/ic_settings"
                 android:title="Settings" />
             <item
-                android:id="@+id/item_navigation_drawer_help_and_feedback"
+                android:id="@+id/item_navigation_drawer_exit"
                 android:icon="@drawable/ic_exit"
                 android:title="Exit" />
         </menu>

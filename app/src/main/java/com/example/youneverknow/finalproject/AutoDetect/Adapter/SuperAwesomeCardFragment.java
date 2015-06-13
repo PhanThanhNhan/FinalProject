@@ -101,8 +101,6 @@ public class SuperAwesomeCardFragment extends Fragment{
                 }
             });
 
-
-
             tvAutoDetectTodayCityName.setText(dataFor10days.cityName);
             tvAutoDetectTodayTemperature.setText(round2decimal(String.valueOf(dataFor10days.data[0].temperature - 273)) + (char) 0x00B0 + "C");
             tvAutoDetectTodayDescription.setText(formalString(dataFor10days.data[0].description));

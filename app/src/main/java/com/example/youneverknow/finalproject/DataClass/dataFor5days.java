@@ -6,7 +6,4 @@ package com.example.youneverknow.finalproject.DataClass;
 public class dataFor5days {
 
     public static dataFor5daysDayNode[] data;
-
-    public static dataFor5daysDayNode[] saveDta;
-
 }

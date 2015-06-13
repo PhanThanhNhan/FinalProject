@@ -10,8 +10,4 @@ public class dataFor10days {
     public static String sunRise;
     public static String sunSet;
 
-    public static dataFor10daysNode[] saveData;
-    public static String saveCityName;
-    public static String saveSunRise;
-    public static String saveSunSet;
 }

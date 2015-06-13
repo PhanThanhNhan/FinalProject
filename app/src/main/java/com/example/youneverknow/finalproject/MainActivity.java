@@ -1,19 +1,13 @@
 package com.example.youneverknow.finalproject;
 
-import android.app.Fragment;
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Handler;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.NotificationCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -22,14 +16,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.avast.android.dialogs.fragment.SimpleDialogFragment;
 import com.dd.CircularProgressButton;
 import com.example.youneverknow.finalproject.AsyncTask.getWeatherUsingCoordinate;
+import com.example.youneverknow.finalproject.AutoDetect.AutoDetectActivity;
 import com.example.youneverknow.finalproject.AutoDetect.getLocation;
 import com.example.youneverknow.finalproject.ChooseOnMap.ChooseOnMapActivity;
 import com.example.youneverknow.finalproject.EnterLocation.EnterLocationActivity;
@@ -47,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
     private final int CHOOSE_ON_MAP_RESULT_CODE = 1;
     private final int ENTER_LOCATION_RESULT_CODE = 2;
     public boolean isLocationGotten = false;
-    private String spMainTut = "spMainTut";
 
     DrawerLayout drawerLayout;
     Toolbar toolbar;
@@ -222,12 +215,20 @@ public class MainActivity extends AppCompatActivity {
                     public boolean onNavigationItemSelected(MenuItem menuItem) {
                         switch (menuItem.getItemId()) {
 
-                            case R.id.item_navigation_drawer_sent_mail:
+                            case R.id.item_navigation_drawer_lastCheck:
+                                menuItem.setChecked(true);
+                                drawerLayout.closeDrawer(GravityCompat.START);
+                                if(getWeatherUsingCoordinate.loadSaveData(MainActivity.this)){
+                                    Intent iGo = new Intent(MainActivity.this, AutoDetectActivity.class);
+                                    startActivity(iGo);
+                                } else Toast.makeText(getApplicationContext(), "There's no data", Toast.LENGTH_LONG).show();
+                                return true;
+                            case R.id.item_navigation_drawer_howtouse:
                                 menuItem.setChecked(true);
                                 drawerLayout.closeDrawer(GravityCompat.START);
                                 tutorial();
                                 return true;
-                            case R.id.item_navigation_drawer_drafts:
+                            case R.id.item_navigation_drawer_about:
                                 menuItem.setChecked(true);
                                 drawerLayout.closeDrawer(GravityCompat.START);
                                 showAboutDialog(ABOUT_DIALOG);
@@ -237,7 +238,7 @@ public class MainActivity extends AppCompatActivity {
                                 drawerLayout.closeDrawer(GravityCompat.START);
                                 showAboutDialog(SETTING_DIALOG);
                                 return true;
-                            case R.id.item_navigation_drawer_help_and_feedback:
+                            case R.id.item_navigation_drawer_exit:
                                 finish();
                                 return true;
                         }
@@ -273,6 +274,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void tutorial(){
+
         ViewTarget target = new ViewTarget(R.id.btnMainAutoDetect, this);
         String title = "Auto Detect";
         String message = "Click this button will automatically detect your location. Then search for weather info";
