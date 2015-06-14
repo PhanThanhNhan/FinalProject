@@ -34,17 +34,6 @@ import java.util.Random;
  */
 public class MyWidget extends AppWidgetProvider {
 
-    private static final String MyOnClick1 = "myOnClickTag1";
-    private static final String MyOnClick2 = "myOnClickTag2";
-    private static final String MyOnClick3 = "myOnClickTag3";
-
-    protected PendingIntent getPendingSelfIntent(Context context, String action) {
-        Intent intent = new Intent(context, getClass());
-        intent.setAction(action);
-        return PendingIntent.getBroadcast(context, 0, intent, 0);
-    }
-
-
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager,
                          int[] appWidgetIds) {
@@ -69,10 +58,10 @@ public class MyWidget extends AppWidgetProvider {
                 e.printStackTrace();
             }
             if(tempJson10days == null || tempJson10days.toString().equals("")){
-                remoteViews.setTextViewText(R.id.tvWidgetTemperature, "Not found");
-                remoteViews.setTextViewText(R.id.tvWidgetDescription, "Not found");
-                remoteViews.setTextViewText(R.id.tvWidgetHumidity, "Not found");
-                remoteViews.setTextViewText(R.id.tvWidgetPressure, "Not found");
+                remoteViews.setTextViewText(R.id.tvWidgetTemperature, context.getString(R.string.notFound));
+                remoteViews.setTextViewText(R.id.tvWidgetDescription, context.getString(R.string.notFound));
+                remoteViews.setTextViewText(R.id.tvWidgetHumidity, context.getString(R.string.notFound));
+                remoteViews.setTextViewText(R.id.tvWidgetPressure, context.getString(R.string.notFound));
             } else {
                 try {
                     curTemperature = Double.parseDouble(tempJson10days.getJSONArray("list").getJSONObject(0).getJSONObject("temp").getString("day"));
@@ -87,7 +76,7 @@ public class MyWidget extends AppWidgetProvider {
                 remoteViews.setTextViewText(R.id.tvWidgetDescription, formalString(curDescription));
                 remoteViews.setTextViewText(R.id.tvWidgetHumidity, String.valueOf(curHumidity) + "%");
                 remoteViews.setTextViewText(R.id.tvWidgetPressure, String.valueOf(curPressure) + "hPa");
-                remoteViews.setImageViewResource(R.id.ivWidgetWeatherIcon, getIcon(curDescription, curTemperature - 273));
+                remoteViews.setImageViewResource(R.id.ivWidgetWeatherIcon, getIcon(context, curDescription, curTemperature - 273));
             }
             // Register an onClickListener
             Intent intent = new Intent(context, MyWidget.class);
@@ -140,8 +129,8 @@ public class MyWidget extends AppWidgetProvider {
         return stringBuilder.toString();
     }
 
-    int getIcon(String description, double temperature){
-        if(description.toLowerCase().contains("clear"))
+    int getIcon(Context context, String description, double temperature){
+        if(description.toLowerCase().contains(context.getString(R.string.clear)))
         {
             if(temperature < 10)
                 return R.drawable.snow4;
@@ -151,13 +140,13 @@ public class MyWidget extends AppWidgetProvider {
                 return R.drawable.sunny;
         }
 
-        if(description.toLowerCase().contains("sunny"))
+        if(description.toLowerCase().contains(context.getString(R.string.sunny)))
             return R.drawable.cloudy1;
-        if(description.toLowerCase().contains("cloud"))
+        if(description.toLowerCase().contains(context.getString(R.string.cloud)))
             return R.drawable.cloudy5;
-        if(description.toLowerCase().contains("rain"))
+        if(description.toLowerCase().contains(context.getString(R.string.rain)))
             return R.drawable.light_rain;
-        if(description.toLowerCase().contains("snow"))
+        if(description.toLowerCase().contains(context.getString(R.string.snow)))
             return R.drawable.snow4;
         return R.drawable.dunno;
     }

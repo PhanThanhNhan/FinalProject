@@ -65,7 +65,7 @@ public class ChooseOnMapActivity extends FragmentActivity {
                 ConnectivityManager connManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
                 NetworkInfo mWifi = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
                 if (!mWifi.isConnected()) {
-                    Toast.makeText(getApplicationContext(), "Turn on your internet connection", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), getString(R.string.noInternetConnection), Toast.LENGTH_LONG).show();
                     return;
                 }
 
@@ -93,7 +93,7 @@ public class ChooseOnMapActivity extends FragmentActivity {
                 ConnectivityManager connManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
                 NetworkInfo mWifi = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
                 if (!mWifi.isConnected()) {
-                    Toast.makeText(getApplicationContext(), "Turn on your internet connection", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), getString(R.string.noInternetConnection), Toast.LENGTH_LONG).show();
                     return;
                 }
 
@@ -113,7 +113,7 @@ public class ChooseOnMapActivity extends FragmentActivity {
         if(gps.canGetLocation()){
             /* Still getting */
             if(gps.getLatitude() == 0 && gps.getLongitude() == 0){
-                Toast.makeText(getApplicationContext(), "GPS Location temporary not found", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), getString(R.string.GPSLocationNotFound), Toast.LENGTH_LONG).show();
                 return;
             }
             LatLng myCoordinates = new LatLng(gps.getLatitude(), gps.getLongitude());

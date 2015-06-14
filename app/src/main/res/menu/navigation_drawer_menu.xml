@@ -6,28 +6,28 @@
             <item
                 android:id="@+id/item_navigation_drawer_lastCheck"
                 android:icon="@drawable/ic_help"
-                android:title="Last Check" />
+                android:title="@string/lastCheck" />
         </menu>
     </item>
 
-    <item android:title="">
+    <item android:title="App">
         <menu>
             <item
                 android:id="@+id/item_navigation_drawer_howtouse"
                 android:icon="@drawable/ic_help"
-                android:title="How to use" />
+                android:title="@string/howToUse" />
             <item
                 android:id="@+id/item_navigation_drawer_about"
                 android:icon="@drawable/ic_about"
-                android:title="About" />
+                android:title="@string/about" />
             <item
                 android:id="@+id/item_navigation_drawer_settings"
                 android:icon="@drawable/ic_settings"
-                android:title="Settings" />
+                android:title="@string/main_Settings" />
             <item
                 android:id="@+id/item_navigation_drawer_exit"
                 android:icon="@drawable/ic_exit"
-                android:title="Exit" />
+                android:title="@string/exit" />
         </menu>
     </item>
 

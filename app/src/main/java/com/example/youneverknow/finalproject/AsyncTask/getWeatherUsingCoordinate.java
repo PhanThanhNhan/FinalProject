@@ -213,6 +213,7 @@ public class getWeatherUsingCoordinate extends AsyncTask<Void, Void, Void>{
             }
         }
 
+        // This happens when user touches AutoDetect button
         if(isHere){
             SharedPreferences preToday = activity.getApplicationContext().getSharedPreferences(spToday, Context.MODE_PRIVATE);
             SharedPreferences.Editor edtToday = preToday.edit();

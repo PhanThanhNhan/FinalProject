@@ -1,0 +1,68 @@
+<resources>
+    <string name="app_name">Let\'s Weather</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+
+    <string name="main_title">Let\'s Weather</string>
+    <string name="main_AutoDetect">Tự động tìm kiếm</string>
+    <string name="main_EnterLocation">Nhập địa điểm</string>
+    <string name="main_ChooseOnMap">Bản đồ</string>
+    <string name="main_Settings">Cài đặt</string>
+    <string name="main_buttonComplete">Xong</string>
+    <string name="main_buttonError">Lỗi</string>
+    <string name="main_buttonRetry">Thử lại</string>
+
+    <string name="autoDetectMessage">Chức năng tự động tìm kiếm vị trí của thiết bị và dự báo thời tiết cho địa điểm này.</string>
+    <string name="enterLocationMessage">Chọn một địa điểm trong danh sách hoặc gõ tên địa danh muốn xem thời tiết.</string>
+    <string name="chooseOnMapMessage">Chọn một địa điểm từ bản đồ để xem thông tin thời tiết.</string>
+    <string name="settingsMessage">Tùy chỉnh một số cài đặt của ừng dụng.</string>
+
+    <string name="autoDetect_ChooseLocation">Chọn địa điểm</string>
+    <string name="autoDetect_ChooseContact">Chọn người muốn gửi</string>
+
+    <string name="enterlocation_EnterLocationHint">Gõ địa danh vào đây</string>
+
+    <string name="tapColumnToView">Chạm vào cột xem chi tiết</string>
+    <string name="refresh">Cập nhật</string>
+
+    <string name="noInternetConnection">Không có kết nối mạng</string>
+    <string name="GPSLocationNotFound">Không tìm thấy địa điểm GPS</string>
+    <string name="appIntroduction">Let\'s weather là một ứng dụng dự báo thời tiết.</string>
+    <string name="therenoData">Không có dữ liệu</string>
+    <string name="invalidInput">Dữ liệu nhập sai</string>
+    <string name="notFound">Không tìm thấy</string>
+
+    <string name="weatherToday">HÔM NAY</string>
+    <string name="weatherIn5Days">DỰ BÁO CHO 5 NGÀY</string>
+    <string name="weatherIn10Days">DỰ BÁO CHO 10 NGÀY</string>
+
+    <string name="pressure">"Áp suất: "</string>
+    <string name="humidity">"Độ ẩm: "</string>
+    <string name="wind">"Gió: "</string>
+    <string name="sunRise">"Mặt trời mọc: "</string>
+    <string name="sunSet">"Mặt trời lặn: "</string>
+    <string name="today">Hôm nay</string>
+    <string name="day">"Ngày "</string>
+    <string name="clear">clear</string>
+    <string name="sunny">sunny</string>
+    <string name="cloud">cloud</string>
+    <string name="rain">rain</string>
+    <string name="snow">snow</string>
+    <string name="itsAbout">"Nhiệt độ hôm nay khoảng "</string>
+    <string name="gonnaBeCold">" độ. Chắc sẽ lạnh lắm đây!"</string>
+    <string name="howAboutPicnic">" độ. Ra ngoài chơi không?"</string>
+    <string name="gonnaBeHot">" độ. Trời khá là nóng. Cẩn thận nhé!"</string>
+    <string name="longTimeNoSee">Xin chào. Lâu ngày không gặp.</string>
+    <string name="sendSMSFail">Gửi tin nhắn thất bại. Vui lòng thử lại sau. </string>
+    <string name="GPSnotEnable">GPS hiện chưa bật. Bạn có muốn đến cài đặt để bật không?</string>
+    <string name="yes">Có</string>
+    <string name="no">Không</string>
+
+    <string name="history">Lịch sử</string>
+    <string name="app">Ứng dụng</string>
+    <string name="lastCheck">Lần kiểm tra cuối</string>
+    <string name="howToUse">Hướng dẫn</string>
+    <string name="about">Thông tin</string>
+    <string name="exit">Thoát</string>
+
+</resources>

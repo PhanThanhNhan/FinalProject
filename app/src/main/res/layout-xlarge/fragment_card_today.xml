@@ -51,9 +51,9 @@
                             android:id="@+id/tvAutoDetectTodayCityname"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="40dp"
+                            android:layout_marginLeft="35dp"
                             android:text="New York, US"
-                            android:textSize="50dp"/>
+                            android:textSize="45dp"/>
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"

@@ -79,7 +79,7 @@ public class EnterLocationActivity extends FragmentActivity {
                 ConnectivityManager connManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
                 NetworkInfo mWifi = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
                 if (!mWifi.isConnected()) {
-                    Toast.makeText(getApplicationContext(), "Turn on your internet connection", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), getString(R.string.noInternetConnection), Toast.LENGTH_LONG).show();
                     return true;
                 }
 
@@ -107,7 +107,7 @@ public class EnterLocationActivity extends FragmentActivity {
                     }
                 }
                 if(!isFound){
-                    Toast.makeText(getApplicationContext(), "Wrong Input", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), getString(R.string.invalidInput), Toast.LENGTH_LONG).show();
                     myAutoComplete.requestFocus();
                     return;
                 }
@@ -115,7 +115,7 @@ public class EnterLocationActivity extends FragmentActivity {
                 ConnectivityManager connManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
                 NetworkInfo mWifi = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
                 if (!mWifi.isConnected()) {
-                    Toast.makeText(getApplicationContext(), "Turn on your internet connection", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), getString(R.string.noInternetConnection), Toast.LENGTH_LONG).show();
                     return;
                 }
 

@@ -90,22 +90,22 @@ public class MainActivity extends AppCompatActivity {
                             ConnectivityManager connManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
                             NetworkInfo mWifi = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
                             if (!mWifi.isConnected()) {
-                                Toast.makeText(getApplicationContext(), "No Internet connection", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(), getResources().getString(R.string.noInternetConnection), Toast.LENGTH_LONG).show();
                                 btnMainAutoDetect.setProgress(0);
-                                btnMainAutoDetect.setIdleText("Retry");
+                                btnMainAutoDetect.setIdleText(getResources().getString(R.string.main_buttonRetry));
                                 return;
                             }
                             getWeatherUsingCoordinate weatherAsyncTask = new getWeatherUsingCoordinate(MainActivity.this, curLatitude, curLongitude, true);
                             weatherAsyncTask.execute();
                             isButtonPressed = true;
                         } else {
-                            Toast.makeText(getApplicationContext(), "GPS location not found", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), getResources().getString(R.string.GPSLocationNotFound), Toast.LENGTH_LONG).show();
                             btnMainAutoDetect.setProgress(-1);
                             Handler handler = new Handler();
                             handler.postDelayed(new Runnable() {
                                 public void run() {
                                     btnMainAutoDetect.setProgress(0);
-                                    btnMainAutoDetect.setIdleText("Retry");
+                                    btnMainAutoDetect.setIdleText(getResources().getString(R.string.main_buttonRetry));
                                 }
                             }, 1000);
 
@@ -221,7 +221,7 @@ public class MainActivity extends AppCompatActivity {
                                 if(getWeatherUsingCoordinate.loadSaveData(MainActivity.this)){
                                     Intent iGo = new Intent(MainActivity.this, AutoDetectActivity.class);
                                     startActivity(iGo);
-                                } else Toast.makeText(getApplicationContext(), "There's no data", Toast.LENGTH_LONG).show();
+                                } else Toast.makeText(getApplicationContext(), getString(R.string.therenoData), Toast.LENGTH_LONG).show();
                                 return true;
                             case R.id.item_navigation_drawer_howtouse:
                                 menuItem.setChecked(true);
@@ -248,7 +248,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private final String ABOUT_DIALOG = "1";
-    private final String HELP_DIALOG = "2";
     private final String SETTING_DIALOG = "3";
 
     public void showAboutDialog(String type){
@@ -256,10 +255,7 @@ public class MainActivity extends AppCompatActivity {
         String title = "Let's weather";
         switch (type){
             case ABOUT_DIALOG:
-                message = "Let's weather is a weather forecast application.";
-                break;
-            case HELP_DIALOG:
-                message = "Please look at the tutorial.";
+                message = getString(R.string.appIntroduction);
                 break;
             case SETTING_DIALOG:
                 title = "Oops sorry!";
@@ -276,29 +272,29 @@ public class MainActivity extends AppCompatActivity {
     private void tutorial(){
 
         ViewTarget target = new ViewTarget(R.id.btnMainAutoDetect, this);
-        String title = "Auto Detect";
-        String message = "Click this button will automatically detect your location. Then search for weather info";
+        String title = getString(R.string.main_AutoDetect);
+        String message = getString(R.string.autoDetectMessage);
         ShowcaseView sv = setupShowcase(target, title, message);
         sv.setOnShowcaseEventListener(new OnShowcaseEventListener() {
             @Override
             public void onShowcaseViewHide(ShowcaseView showcaseView) {
                 ViewTarget target = new ViewTarget(R.id.btnMainEnterLocation, MainActivity.this);
-                String title = "Enter Location";
-                String message = "There 's a listview and edittext. Long tap on list item to search or enter city name on TextField ";
+                String title = getString(R.string.main_EnterLocation);
+                String message = getString(R.string.enterLocationMessage);
                 ShowcaseView sv = setupShowcase(target, title, message);
                 sv.setOnShowcaseEventListener(new OnShowcaseEventListener() {
                     @Override
                     public void onShowcaseViewHide(ShowcaseView showcaseView) {
                         ViewTarget target = new ViewTarget(R.id.btnMainChooseOnMap, MainActivity.this);
-                        String title = "Choose on map";
-                        String message = "Choose a location on our map to see its weather";
+                        String title = getString(R.string.main_ChooseOnMap);
+                        String message = getString(R.string.chooseOnMapMessage);
                         ShowcaseView sv = setupShowcase(target, title, message);
                         sv.setOnShowcaseEventListener(new OnShowcaseEventListener() {
                             @Override
                             public void onShowcaseViewHide(ShowcaseView showcaseView) {
                                 ViewTarget target = new ViewTarget(R.id.btnMainSettings, MainActivity.this);
-                                String title = "Settings";
-                                String message = "Setting to make app more easier";
+                                String title = getString(R.string.main_Settings);
+                                String message = getString(R.string.settingsMessage);
                                 setupShowcase(target, title, message);
                             }
 

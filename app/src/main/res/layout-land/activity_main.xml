@@ -58,8 +58,8 @@
                         android:textColor="@android:color/white"
                         android:textSize="18dp"
                         app:cpb_iconComplete="@drawable/ic_action_accept"
-                        app:cpb_textError="Error"
-                        app:cpb_textIdle="Auto-Detect"
+                        app:cpb_textError="@string/main_buttonError"
+                        app:cpb_textIdle="@string/main_AutoDetect"
                         app:cpb_cornerRadius="10dp"
                         />
                 </LinearLayout>
@@ -76,9 +76,9 @@
                         android:layout_marginLeft="10dp"
                         android:textColor="@android:color/white"
                         android:textSize="18dp"
-                        app:cpb_textComplete="Complete"
-                        app:cpb_textError="Error"
-                        app:cpb_textIdle="Enter Location"
+                        app:cpb_textComplete="@string/main_buttonComplete"
+                        app:cpb_textError="@string/main_buttonError"
+                        app:cpb_textIdle="@string/main_EnterLocation"
                         app:cpb_cornerRadius="10dp" />
                 </LinearLayout>
 
@@ -103,9 +103,9 @@
                         android:layout_marginRight="10dp"
                         android:textColor="@android:color/white"
                         android:textSize="18dp"
-                        app:cpb_textComplete="Complete"
-                        app:cpb_textError="Error"
-                        app:cpb_textIdle="Choose on Map"
+                        app:cpb_textComplete="@string/main_buttonComplete"
+                        app:cpb_textError="@string/main_buttonError"
+                        app:cpb_textIdle="@string/main_ChooseOnMap"
                         app:cpb_cornerRadius="10dp" />
                 </LinearLayout>
                 <LinearLayout
@@ -121,9 +121,9 @@
                         android:layout_marginLeft="10dp"
                         android:textColor="@android:color/white"
                         android:textSize="18dp"
-                        app:cpb_textComplete="Complete"
-                        app:cpb_textError="Error"
-                        app:cpb_textIdle="Settings"
+                        app:cpb_textComplete="@string/main_buttonComplete"
+                        app:cpb_textError="@string/main_buttonError"
+                        app:cpb_textIdle="@string/main_Settings"
                         app:cpb_cornerRadius="10dp" />
                 </LinearLayout>
             </LinearLayout>

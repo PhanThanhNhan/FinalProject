@@ -80,12 +80,12 @@ public class ContactActivity extends Activity implements View.OnClickListener, L
 
         String message;
         if(AutoDetectActivity.isCalculated && dataFor10days.data[0].temperature < 293)
-            message = "Its about " + String.valueOf(AutoDetectActivity.curTemperature - 273) + " degree. Gonna be cold today!";
+            message = getString(R.string.itsAbout) + String.valueOf(AutoDetectActivity.curTemperature - 273) + getString(R.string.gonnaBeCold);
         else if(AutoDetectActivity.isCalculated&& dataFor10days.data[0].temperature < 303)
-            message = "Its about " + String.valueOf(AutoDetectActivity.curTemperature - 273) + " degree. How about a picnic?";
+            message = getString(R.string.itsAbout) + String.valueOf(AutoDetectActivity.curTemperature - 273) + getString(R.string.howAboutPicnic);
         else if(AutoDetectActivity.isCalculated)
-            message = "Its about " + String.valueOf(AutoDetectActivity.curTemperature - 273) + " degree. Gonna be hot. Take care of yourself buddy!";
-        else message = "Hi buddy! Long time no see";
+            message = getString(R.string.itsAbout) + String.valueOf(AutoDetectActivity.curTemperature - 273) + getString(R.string.gonnaBeHot);
+        else message = getString(R.string.longTimeNoSee);
 
         smsIntent.putExtra("sms_body", message);
 
@@ -94,7 +94,7 @@ public class ContactActivity extends Activity implements View.OnClickListener, L
             Log.i("Finished sending SMS...", "");
         } catch (android.content.ActivityNotFoundException ex) {
             Toast.makeText(ContactActivity.this,
-                    "SMS faild, please try again later.", Toast.LENGTH_SHORT).show();
+                    getString(R.string.sendSMSFail), Toast.LENGTH_SHORT).show();
         }
 
     }

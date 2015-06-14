@@ -1,16 +1,68 @@
 <resources>
-    <string name="app_name">LetsWeather</string>
-
+    <string name="app_name">Let\'s Weather</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_settings">SettingsActivity</string>
 
-    <string name="main_title">Lets Weather</string>
+    <string name="main_title">Let\'s Weather</string>
     <string name="main_AutoDetect">Auto Detect</string>
     <string name="main_EnterLocation">Enter Location</string>
     <string name="main_ChooseOnMap">Choose on Map</string>
     <string name="main_Settings">Settings</string>
-    <string name="title_activity_settings">SettingsActivity</string>
+    <string name="main_buttonComplete">Complete</string>
+    <string name="main_buttonError">Error</string>
+    <string name="main_buttonRetry">Retry</string>
 
-    <string name="hello_world">Hello world!</string>
+    <string name="autoDetectMessage">Click this button will automatically detect your location. Then search for weather info.</string>
+    <string name="enterLocationMessage">Choose a location on List or Enter its name in TextField.</string>
+    <string name="chooseOnMapMessage">Choose a location on Google map to see its weather.</string>
+    <string name="settingsMessage">Setting to make app more comfortable.</string>
 
+    <string name="autoDetect_ChooseLocation">Choose a location</string>
+    <string name="autoDetect_ChooseContact">Choose a contact</string>
+
+    <string name="enterlocation_EnterLocationHint">Enter location here</string>
+
+    <string name="tapColumnToView">Tap a column to view</string>
+    <string name="refresh">Update</string>
+
+    <string name="noInternetConnection">No Internet connection</string>
+    <string name="GPSLocationNotFound">GPS location not found</string>
+    <string name="appIntroduction">Let\'s weather is a weather forecast application.</string>
+    <string name="therenoData">There\'s no data</string>
+    <string name="invalidInput">Invalid Input</string>
+    <string name="notFound">Not found</string>
+
+    <string name="weatherToday">WEATHER TODAY</string>
+    <string name="weatherIn5Days">WEATHER IN 5 DAYS</string>
+    <string name="weatherIn10Days">WEATHER IN 10 DAYS</string>
+
+    <string name="pressure">"Pressure: "</string>
+    <string name="humidity">"Humidity: "</string>
+    <string name="wind">"Wind: "</string>
+    <string name="sunRise">"Sunrise: "</string>
+    <string name="sunSet">"Sunset: "</string>
+    <string name="today">Today</string>
+    <string name="day">"Day "</string>
+    <string name="clear">clear</string>
+    <string name="sunny">sunny</string>
+    <string name="cloud">cloud</string>
+    <string name="rain">rain</string>
+    <string name="snow">snow</string>
+    <string name="itsAbout">"It\'s about "</string>
+    <string name="gonnaBeCold">" degree. Gonna be cold today!"</string>
+    <string name="howAboutPicnic">" degree. How about a picnic?"</string>
+    <string name="gonnaBeHot">" degree. Gonna be hot. Take care of yourself buddy!"</string>
+    <string name="longTimeNoSee">Hi buddy! Long time no see</string>
+    <string name="sendSMSFail">SMS failed, please try again later.</string>
+    <string name="GPSnotEnable">GPS is not enabled. Do you want to go to settings menu?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+
+    <string name="history">History</string>
+    <string name="app">App</string>
+    <string name="lastCheck">Last Check</string>
+    <string name="howToUse">How to use</string>
+    <string name="about">About</string>
+    <string name="exit">Exit</string>
 
 </resources>

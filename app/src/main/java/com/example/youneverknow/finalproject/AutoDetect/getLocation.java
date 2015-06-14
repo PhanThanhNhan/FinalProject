@@ -12,6 +12,8 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.provider.Settings;
 
+import com.example.youneverknow.finalproject.R;
+
 /**
  * Created by YouNeverKnow on 5/31/2015.
  */
@@ -105,15 +107,15 @@ public class getLocation extends Service implements LocationListener {
     public void showSettingsAlert(){
         AlertDialog.Builder alerBuilder = new AlertDialog.Builder(context);
         alerBuilder.setTitle("GPS");
-        alerBuilder.setMessage("GPS is not enabled. Do you want to go to settings menu?");
-        alerBuilder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+        alerBuilder.setMessage(getString(R.string.GPSnotEnable));
+        alerBuilder.setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Intent i = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                 context.startActivity(i);
             }
         });
-        alerBuilder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+        alerBuilder.setNegativeButton(getString(R.string.no), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();

@@ -51,7 +51,7 @@ public class AutoDetectActivity extends FragmentActivity{
 
     public void setTabLayout(){
         ViewPager pager = (ViewPager) findViewById(R.id.pager);
-        pager.setAdapter(new MyPagerAdapter(getSupportFragmentManager()));
+        pager.setAdapter(new MyPagerAdapter(getSupportFragmentManager(), getApplicationContext()));
         PagerSlidingTabStrip tabs = (PagerSlidingTabStrip)findViewById(R.id.tabs);
         tabs.setViewPager(pager);
     }
@@ -104,7 +104,7 @@ public class AutoDetectActivity extends FragmentActivity{
     }
 
     int getIcon(String description, double temperature){
-        if(description.toLowerCase().contains("clear"))
+        if(description.toLowerCase().contains(getString(R.string.clear)))
         {
             if(temperature < 10)
                 return R.drawable.snow4;
@@ -113,13 +113,14 @@ public class AutoDetectActivity extends FragmentActivity{
             else
                 return R.drawable.sunny;
         }
-        if(description.toLowerCase().contains("sunny"))
+
+        if(description.toLowerCase().contains(getString(R.string.sunny)))
             return R.drawable.cloudy1;
-        if(description.toLowerCase().contains("cloud"))
+        if(description.toLowerCase().contains(getString(R.string.cloud)))
             return R.drawable.cloudy5;
-        if(description.toLowerCase().contains("rain"))
+        if(description.toLowerCase().contains(getString(R.string.rain)))
             return R.drawable.light_rain;
-        if(description.toLowerCase().contains("snow"))
+        if(description.toLowerCase().contains(getString(R.string.snow)))
             return R.drawable.snow4;
         return R.drawable.dunno;
     }
