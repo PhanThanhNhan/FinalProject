@@ -43,18 +43,13 @@
     <string name="sunSet">"Sunset: "</string>
     <string name="today">Today</string>
     <string name="day">"Day "</string>
-    <string name="clear">clear</string>
-    <string name="sunny">sunny</string>
-    <string name="cloud">cloud</string>
-    <string name="rain">rain</string>
-    <string name="snow">snow</string>
     <string name="itsAbout">"It\'s about "</string>
     <string name="gonnaBeCold">" degree. Gonna be cold today!"</string>
     <string name="howAboutPicnic">" degree. How about a picnic?"</string>
     <string name="gonnaBeHot">" degree. Gonna be hot. Take care of yourself buddy!"</string>
     <string name="longTimeNoSee">Hi buddy! Long time no see</string>
     <string name="sendSMSFail">SMS failed, please try again later.</string>
-    <string name="GPSnotEnable">GPS is not enabled. Do you want to go to settings menu?</string>
+    <string name="GPSnotEnable">"GPS is not enabled. Do you want to go to settings menu?"</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
 
@@ -64,5 +59,73 @@
     <string name="howToUse">How to use</string>
     <string name="about">About</string>
     <string name="exit">Exit</string>
+    
+    // Weather type
+    -- Thunder
+    <string name="thunderStormWithLightRain">Thunderstorm with light rain</string>
+    <string name="thunderStormWithRain">Thunderstorm with rain</string>
+    <string name="thunderStormWithHeavyRain">thunderstorm with heavy rain</string>
+    <string name="lightThunderStorm">Light thunderstorm</string>
+    <string name="thunderStorm">Thunderstorm</string>
+    <string name="heavyThunderStorm">Heavy thunderstorm</string>
+    <string name="raggedThunderStorm">Ragged thunderstorm</string>
+    <string name="thunderStormWithLightDrizzle">Thunderstorm with light drizzle	</string>
+    <string name="thunderStormWithDrizzle">Thunderstorm with drizzle</string>
+    <string name="thunderStormWithHeavyDrizzle">Thunderstorm with heavy drizzle	</string>
+
+    --Drizzle
+    <string name="lightIntensityDrizzle">Light intensity drizzle</string>
+    <string name="drizzle">Drizzle</string>
+    <string name="heavyIntensityDrizzle">Heavy intensity drizzle</string>
+    <string name="lightIntensityDrizzleRain">Light intensity drizzle rain</string>
+    <string name="drizzleRain">Drizzle rain</string>
+    <string name="heavyIntensityDrizzleRain">Heavy intensity drizzle rain</string>
+    <string name="showerRainAndDrizzle">Shower rain and drizzle</string>
+    <string name="heavyShowerRainAndDrizzle">Heavy shower rain and drizzle	</string>
+    <string name="showerDrizzle">Shower drizzle</string>
+
+    -- Rain
+    <string name="lightRain">Light rain</string>
+    <string name="moderateRain">Moderate rain</string>
+    <string name="heavyIntensityRain">Heavy intensity rain</string>
+    <string name="veryHeavyRain">Very heavy rain</string>
+    <string name="extremeRain">Extreme rain</string>
+    <string name="freezingRain">Freezing rain</string>
+    <string name="lightIntensityShowerRain">Light intensity shower rain</string>
+    <string name="showerRain">Shower rain</string>
+    <string name="heavyIntensityShowerRain">Heavy intensity shower rain</string>
+    <string name="raggedShowerRain">Ragged shower rain</string>
+
+    -- Snow
+    <string name="lightSnow">Light snow</string>
+    <string name="snow">Snow</string>
+    <string name="heavySnow">Heavy snow</string>
+    <string name="sleet">Sleet</string>
+    <string name="showerSleet">Shower sleet</string>
+    <string name="lightRainAndSnow">Light rain and snow	</string>
+    <string name="rainAndSnow">Rain and snow</string>
+    <string name="lightShowerSnow">Light shower snow</string>
+    <string name="showerSnow">Shower snow</string>
+    <string name="heavyShowerSnow">Heavy shower snow</string>
+
+    -- Atmosphere
+    <string name="mist">Mist</string>
+    <string name="smoke">Smoke</string>
+    <string name="haze">Haze</string>
+    <string name="sandDustWhirls">Sand, dust whirls	</string>
+    <string name="fog">Fog</string>
+    <string name="sand">Sand</string>
+    <string name="dust">Dust</string>
+    <string name="volcanicAsh">Volcanic ash</string>
+    <string name="squalls">Squalls</string>
+    <string name="tornado">Tornado</string>
+
+    -- Clouds
+    <string name="clearSky">Clear sky</string>
+    <string name="fewClouds">Few clouds</string>
+    <string name="scatteredClouds">Scattered clouds</string>
+    <string name="brokenClouds">Broken clouds</string>
+    <string name="overcastClouds">Overcast clouds</string>
+    <string name="skyIsClear">Sky is clear</string>
 
 </resources>

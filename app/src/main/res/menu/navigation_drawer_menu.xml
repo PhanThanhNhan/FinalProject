@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:title="History">
+    <item android:title="@string/history">
         <menu>
             <item
                 android:id="@+id/item_navigation_drawer_lastCheck"
@@ -10,7 +10,7 @@
         </menu>
     </item>
 
-    <item android:title="App">
+    <item android:title="@string/app">
         <menu>
             <item
                 android:id="@+id/item_navigation_drawer_howtouse"

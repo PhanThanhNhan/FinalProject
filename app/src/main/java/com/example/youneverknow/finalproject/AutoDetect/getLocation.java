@@ -107,15 +107,15 @@ public class getLocation extends Service implements LocationListener {
     public void showSettingsAlert(){
         AlertDialog.Builder alerBuilder = new AlertDialog.Builder(context);
         alerBuilder.setTitle("GPS");
-        alerBuilder.setMessage(getString(R.string.GPSnotEnable));
-        alerBuilder.setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
+        alerBuilder.setMessage(context.getString(R.string.GPSnotEnable));
+        alerBuilder.setPositiveButton(context.getString(R.string.yes), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Intent i = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                 context.startActivity(i);
             }
         });
-        alerBuilder.setNegativeButton(getString(R.string.no), new DialogInterface.OnClickListener() {
+        alerBuilder.setNegativeButton(context.getString(R.string.no), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();

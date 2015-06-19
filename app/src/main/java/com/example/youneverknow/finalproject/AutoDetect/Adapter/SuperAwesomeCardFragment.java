@@ -103,7 +103,7 @@ public class SuperAwesomeCardFragment extends Fragment{
 
             tvAutoDetectTodayCityName.setText(dataFor10days.cityName);
             tvAutoDetectTodayTemperature.setText(round2decimal(String.valueOf(dataFor10days.data[0].temperature - 273)) + (char) 0x00B0 + "C");
-            tvAutoDetectTodayDescription.setText(formalString(dataFor10days.data[0].description));
+            tvAutoDetectTodayDescription.setText(dataFor10days.data[0].description);
             tvAutoDetectTodayPressure.setText(getString(R.string.pressure) + dataFor10days.data[0].pressure + " hPa");
             tvAutoDetectTodayHumidity.setText(getString(R.string.humidity) + dataFor10days.data[0].humidity + "%");
             tvAutoDetectTodayWind.setText(getString(R.string.wind) + dataFor10days.data[0].wind + " m/s");
@@ -297,7 +297,7 @@ public class SuperAwesomeCardFragment extends Fragment{
             //generateLineData(value.getColor(), 100);
             generateLineData(columnIndex, ChartUtils.COLOR_RED, 100);
             tvAutoDetect5daysTemperature.setText(round2decimal(String.valueOf(dataFor10days.data[columnIndex].temperature - 273)) + (char) 0x00B0 + "C");
-            tvAutoDetect5daysDescription.setText(formalString(dataFor10days.data[columnIndex].description));
+            tvAutoDetect5daysDescription.setText(dataFor10days.data[columnIndex].description);
             tvAutoDetect5daysPressure.setText(getString(R.string.pressure) + dataFor10days.data[columnIndex].pressure + " hPa");
             tvAutoDetect5daysHumidity.setText(getString(R.string.humidity) + dataFor10days.data[columnIndex].humidity + "%");
             tvAutoDetect5daysWind.setText(getString(R.string.wind) + dataFor10days.data[columnIndex].wind + " m/s");
@@ -351,7 +351,7 @@ public class SuperAwesomeCardFragment extends Fragment{
                     break;
             }
             tvAutoDetect5daysTemperature.setText(round2decimal(String.valueOf(dataFor5days.data[columnSelectedIndex].time[i1].temperature - 273)) + (char) 0x00B0 + "C");
-            tvAutoDetect5daysDescription.setText(formalString(dataFor5days.data[columnSelectedIndex].time[i1].description));
+            tvAutoDetect5daysDescription.setText(dataFor5days.data[columnSelectedIndex].time[i1].description);
             tvAutoDetect5daysPressure.setText(getString(R.string.pressure) + dataFor5days.data[columnSelectedIndex].time[i1].pressure + " hPa");
             tvAutoDetect5daysHumidity.setText(getString(R.string.humidity) + dataFor5days.data[columnSelectedIndex].time[i1].humidity + "%");
             tvAutoDetect5daysWind.setText(getString(R.string.wind) + dataFor5days.data[columnSelectedIndex].time[i1].wind + " m/s");
@@ -504,7 +504,7 @@ public class SuperAwesomeCardFragment extends Fragment{
         public void onValueSelected(int columnIndex, int subcolumnIndex, SubcolumnValue value) {
 
             tvAutoDetect10daysTemperature.setText(round2decimal(String.valueOf(dataFor10days.data[columnIndex].temperature - 273)) + (char) 0x00B0 + "C");
-            tvAutoDetect10daysDescription.setText(formalString(dataFor10days.data[columnIndex].description));
+            tvAutoDetect10daysDescription.setText(dataFor10days.data[columnIndex].description);
             tvAutoDetect10daysPressure.setText(getString(R.string.pressure) + dataFor10days.data[columnIndex].pressure + " hPa");
             tvAutoDetect10daysHumidity.setText(getString(R.string.humidity) + dataFor10days.data[columnIndex].humidity + "%");
             tvAutoDetect10daysWind.setText(getString(R.string.wind) + dataFor10days.data[columnIndex].wind + " m/s");
@@ -524,7 +524,7 @@ public class SuperAwesomeCardFragment extends Fragment{
         @Override
         public void onValueSelected(int i, int i1, PointValue pointValue) {
             tvAutoDetect10daysTemperature.setText(round2decimal(String.valueOf(dataFor10days.data[i1].temperature - 273)) + (char) 0x00B0 + "C");
-            tvAutoDetect10daysDescription.setText(formalString(dataFor10days.data[i1].description));
+            tvAutoDetect10daysDescription.setText(dataFor10days.data[i1].description);
             tvAutoDetect10daysPressure.setText(getString(R.string.pressure) + dataFor10days.data[i1].pressure + " hPa");
             tvAutoDetect10daysHumidity.setText(getString(R.string.humidity) + dataFor10days.data[i1].humidity + "%");
             tvAutoDetect10daysWind.setText(getString(R.string.wind) + dataFor10days.data[i1].wind + " m/s");
@@ -555,21 +555,6 @@ public class SuperAwesomeCardFragment extends Fragment{
                 break;
             }
             stringBuilder.append(number.charAt(i));
-        }
-        return stringBuilder.toString();
-    }
-
-    String formalString(String str){
-        if(str == "")
-            return "";
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append((char)(str.charAt(0) - 32));
-        for (int i = 1; i < str.length(); i++){
-            if(str.charAt(i) == '-'){
-                stringBuilder.append(" ");
-                continue;
-            }
-            stringBuilder.append(str.charAt(i));
         }
         return stringBuilder.toString();
     }

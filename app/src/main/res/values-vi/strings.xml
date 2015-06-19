@@ -43,26 +43,89 @@
     <string name="sunSet">"Mặt trời lặn: "</string>
     <string name="today">Hôm nay</string>
     <string name="day">"Ngày "</string>
-    <string name="clear">clear</string>
-    <string name="sunny">sunny</string>
-    <string name="cloud">cloud</string>
-    <string name="rain">rain</string>
-    <string name="snow">snow</string>
     <string name="itsAbout">"Nhiệt độ hôm nay khoảng "</string>
     <string name="gonnaBeCold">" độ. Chắc sẽ lạnh lắm đây!"</string>
     <string name="howAboutPicnic">" độ. Ra ngoài chơi không?"</string>
     <string name="gonnaBeHot">" độ. Trời khá là nóng. Cẩn thận nhé!"</string>
     <string name="longTimeNoSee">Xin chào. Lâu ngày không gặp.</string>
     <string name="sendSMSFail">Gửi tin nhắn thất bại. Vui lòng thử lại sau. </string>
-    <string name="GPSnotEnable">GPS hiện chưa bật. Bạn có muốn đến cài đặt để bật không?</string>
+    <string name="GPSnotEnable">GPS hiện chưa bật. Bạn có muốn đến cài đặt không?</string>
     <string name="yes">Có</string>
     <string name="no">Không</string>
 
     <string name="history">Lịch sử</string>
     <string name="app">Ứng dụng</string>
-    <string name="lastCheck">Lần kiểm tra cuối</string>
+    <string name="lastCheck">Lần cuối</string>
     <string name="howToUse">Hướng dẫn</string>
     <string name="about">Thông tin</string>
     <string name="exit">Thoát</string>
+
+    // Weather type
+    -- Thunder
+    <string name="thunderStormWithLightRain">Giông, mưa nhỏ</string>
+    <string name="thunderStormWithRain">Giông, có mưa</string>
+    <string name="thunderStormWithHeavyRain">Giông, mưa lớn</string>
+    <string name="lightThunderStorm">Giông nhẹ</string>
+    <string name="thunderStorm">Trời giông</string>
+    <string name="heavyThunderStorm">Giông lớn</string>
+    <string name="raggedThunderStorm">Giông rải rác</string>
+    <string name="thunderStormWithLightDrizzle">Giông, mưa phùn nhỏ</string>
+    <string name="thunderStormWithDrizzle">Giông, mưa phùn</string>
+    <string name="thunderStormWithHeavyDrizzle">Giông. mưa phùn lớn</string>
+
+    --Drizzle
+    <string name="lightIntensityDrizzle">Mưa phùn</string>
+    <string name="drizzle">Mưa phùn</string>
+    <string name="heavyIntensityDrizzle">Mưa phùn</string>
+    <string name="lightIntensityDrizzleRain">Mưa phùn</string>
+    <string name="drizzleRain">Mưa phùn</string>
+    <string name="heavyIntensityDrizzleRain">Mưa phùn</string>
+    <string name="showerRainAndDrizzle">Mưa phùn</string>
+    <string name="heavyShowerRainAndDrizzle">Mưa phùn</string>
+    <string name="showerDrizzle">Mưa phùn</string>
+
+    -- Rain
+    <string name="lightRain">Mưa nhỏ</string>
+    <string name="moderateRain">Mưa vừa</string>
+    <string name="heavyIntensityRain">Mưa lớn</string>
+    <string name="veryHeavyRain">Mưa rất lớnt</string>
+    <string name="extremeRain">Mưa nặng hạt</string>
+    <string name="freezingRain">Mưa đá</string>
+    <string name="lightIntensityShowerRain">Mưa nhỏ</string>
+    <string name="showerRain">Mưa nhỏ</string>
+    <string name="heavyIntensityShowerRain">Mưa lớn</string>
+    <string name="raggedShowerRain">Mưa rải rác</string>
+
+    -- Snow
+    <string name="lightSnow">Tuyết rơi nhẹ</string>
+    <string name="snow">Tuyết rơi</string>
+    <string name="heavySnow">Tuyết rơi lớn</string>
+    <string name="sleet">Mưa tuyết</string>
+    <string name="showerSleet">Mưa tuyết nhỏ</string>
+    <string name="lightRainAndSnow">Mưa nhỏ, tuyết rơi</string>
+    <string name="rainAndSnow">Mưa, tuyết rơi</string>
+    <string name="lightShowerSnow">Tuyết rơi nhẹ</string>
+    <string name="showerSnow">Tuyết rơi nhẹ</string>
+    <string name="heavyShowerSnow">Tuyết rơi lớn</string>
+
+    -- Atmosphere
+    <string name="mist">Sương mù</string>
+    <string name="smoke">Sương mù</string>
+    <string name="haze">Sương mù</string>
+    <string name="sandDustWhirls">Gió bụi</string>
+    <string name="fog">Sương mù</string>
+    <string name="sand">Bụi</string>
+    <string name="dust">Bụi</string>
+    <string name="volcanicAsh">Tro núi lửa</string>
+    <string name="squalls">Gió giật</string>
+    <string name="tornado">Lốc xoáy</string>
+
+    -- Clouds
+    <string name="clearSky">Trời quang</string>
+    <string name="fewClouds">Ít mây</string>
+    <string name="scatteredClouds">Mây rải rác</string>
+    <string name="brokenClouds">Mây nhỏ</string>
+    <string name="overcastClouds">Mây u ám</string>
+    <string name="skyIsClear">Trời quang</string>
 
 </resources>
