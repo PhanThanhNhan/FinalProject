@@ -62,7 +62,7 @@ public class AutoDetectActivity extends FragmentActivity{
 
         Notification noti = new Notification.Builder(this)
                 .setContentTitle(dataFor10days.data[0].description)
-                .setContentText(round2decimal(round2decimal(String.valueOf((dataFor10days.data[0].temperature - 273)))) + (char) 0x00B0 + "C" ).setSmallIcon(getIcon(curDescription, curTemperature))
+                .setContentText(round2decimal(round2decimal(String.valueOf((dataFor10days.data[0].temperature - 273)))) + (char) 0x00B0 + "C" ).setSmallIcon(getIcon(curDescription))
                 .setContentIntent(pIntent).build();
         NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         noti.flags |= Notification.FLAG_NO_CLEAR;
@@ -88,25 +88,125 @@ public class AutoDetectActivity extends FragmentActivity{
         return stringBuilder.toString();
     }
 
-    int getIcon(String description, double temperature){
-        if(description.toLowerCase().contains("clear"))
-        {
-            if(temperature < 10)
-                return R.drawable.snow4;
-            if (temperature < 30)
-                return R.drawable.fog;
-            else
-                return R.drawable.sunny;
-        }
+    int getIcon(String description){
+        if(description.equals(getString(R.string.thunderStormWithLightRain)))
+            return R.drawable.tstorm3;
+        else if(description.equals(getString(R.string.thunderStormWithRain)))
+            return R.drawable.tstorm3;
+        else if(description.equals(getString(R.string.thunderStormWithHeavyRain)))
+            return R.drawable.tstorm3;
+        else if(description.equals(getString(R.string.lightThunderStorm)))
+            return R.drawable.tstorm3;
+        else if(description.equals(getString(R.string.thunderStorm)))
+            return R.drawable.tstorm3;
+        else if(description.equals(getString(R.string.heavyThunderStorm)))
+            return R.drawable.tstorm3;
+        else if(description.equals(getString(R.string.raggedThunderStorm)))
+            return R.drawable.tstorm3;
+        else if(description.equals(getString(R.string.thunderStormWithLightDrizzle)))
+            return R.drawable.tstorm3;
+        else if(description.equals(getString(R.string.thunderStormWithDrizzle)))
+            return R.drawable.tstorm3;
+        else if(description.equals(getString(R.string.thunderStormWithHeavyDrizzle)))
+            return R.drawable.tstorm3;
+        else if(description.equals(getString(R.string.thunderStormWithRain)))
+            return R.drawable.tstorm3;
 
-        if(description.toLowerCase().contains("sunny"))
-            return R.drawable.cloudy1;
-        if(description.toLowerCase().contains("cloud"))
-            return R.drawable.cloudy5;
-        if(description.toLowerCase().contains("rain"))
+        else if(description.equals(getString(R.string.lightIntensityDrizzle)))
             return R.drawable.light_rain;
-        if(description.toLowerCase().contains("snow"))
+        else if(description.equals(getString(R.string.drizzle)))
+            return R.drawable.light_rain;
+        else if(description.equals(getString(R.string.heavyIntensityDrizzle)))
+            return R.drawable.light_rain;
+        else if(description.equals(getString(R.string.lightIntensityDrizzleRain)))
+            return R.drawable.light_rain;
+        else if(description.equals(getString(R.string.drizzleRain)))
+            return R.drawable.light_rain;
+        else if(description.equals(getString(R.string.heavyIntensityDrizzleRain)))
+            return R.drawable.light_rain;
+        else if(description.equals(getString(R.string.showerRainAndDrizzle)))
+            return R.drawable.shower3;
+        else if(description.equals(getString(R.string.heavyShowerRainAndDrizzle)))
+            return R.drawable.shower3;
+        else if(description.equals(getString(R.string.showerDrizzle)))
+            return R.drawable.shower3;
+
+        else if(description.equals(getString(R.string.lightRain)))
+            return R.drawable.light_rain;
+        else if(description.equals(getString(R.string.moderateRain)))
+            return R.drawable.light_rain;
+        else if(description.equals(getString(R.string.heavyIntensityRain)))
+            return R.drawable.shower3;
+        else if(description.equals(getString(R.string.veryHeavyRain)))
+            return R.drawable.shower3;
+        else if(description.equals(getString(R.string.extremeRain)))
+            return R.drawable.shower3;
+        else if(description.equals(getString(R.string.freezingRain)))
+            return R.drawable.hail;
+        else if(description.equals(getString(R.string.lightIntensityShowerRain)))
+            return R.drawable.light_rain;
+        else if(description.equals(getString(R.string.showerRain)))
+            return R.drawable.shower3;
+        else if(description.equals(getString(R.string.heavyIntensityShowerRain)))
+            return R.drawable.shower3;
+        else if(description.equals(getString(R.string.raggedShowerRain)))
+            return R.drawable.shower3;
+
+        else if(description.equals(getString(R.string.lightSnow)))
             return R.drawable.snow4;
-        return R.drawable.dunno;
+        else if(description.equals(getString(R.string.snow)))
+            return R.drawable.snow4;
+        else if(description.equals(getString(R.string.heavySnow)))
+            return R.drawable.snow5;
+        else if(description.equals(getString(R.string.sleet)))
+            return R.drawable.sleet;
+        else if(description.equals(getString(R.string.showerSleet)))
+            return R.drawable.sleet;
+        else if(description.equals(getString(R.string.lightRainAndSnow)))
+            return R.drawable.snow4;
+        else if(description.equals(getString(R.string.rainAndSnow)))
+            return R.drawable.sleet;
+        else if(description.equals(getString(R.string.lightShowerSnow)))
+            return R.drawable.sleet;
+        else if(description.equals(getString(R.string.showerSnow)))
+            return R.drawable.sleet;
+        else if(description.equals(getString(R.string.heavyShowerSnow)))
+            return R.drawable.sleet;
+
+        else if(description.equals(getString(R.string.mist)))
+            return R.drawable.mist;
+        else if(description.equals(getString(R.string.smoke)))
+            return R.drawable.fog;
+        else if(description.equals(getString(R.string.haze)))
+            return R.drawable.fog;
+        else if(description.equals(getString(R.string.sandDustWhirls)))
+            return R.drawable.fog;
+        else if(description.equals(getString(R.string.fog)))
+            return R.drawable.fog;
+        else if(description.equals(getString(R.string.sand)))
+            return R.drawable.fog;
+        else if(description.equals(getString(R.string.dust)))
+            return R.drawable.fog;
+        else if(description.equals(getString(R.string.volcanicAsh)))
+            return R.drawable.fog;
+        else if(description.equals(getString(R.string.squalls)))
+            return R.drawable.squalls;
+        else if(description.equals(getString(R.string.tornado)))
+            return R.drawable.tornado;
+
+        else if(description.equals(getString(R.string.clearSky)))
+            return R.drawable.sunny;
+        else if(description.equals(getString(R.string.fewClouds)))
+            return R.drawable.cloudy1;
+        else if(description.equals(getString(R.string.scatteredClouds)))
+            return R.drawable.cloudy2;
+        else if(description.equals(getString(R.string.brokenClouds)))
+            return R.drawable.cloudy5;
+        else if(description.equals(getString(R.string.overcastClouds)))
+            return R.drawable.overcast;
+        else if(description.equals(getString(R.string.skyIsClear)))
+            return R.drawable.sunny;
+        else
+            return R.drawable.dunno;
     }
 }

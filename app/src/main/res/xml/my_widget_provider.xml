@@ -5,7 +5,6 @@
     android:minHeight="110dp"
     android:initialLayout="@layout/my_widget"
     android:updatePeriodMillis="180000"
-    android:resizeMode="horizontal|vertical"
-    android:previewImage="@drawable/cloudytest">
+    android:resizeMode="horizontal|vertical">
 
 </appwidget-provider>
