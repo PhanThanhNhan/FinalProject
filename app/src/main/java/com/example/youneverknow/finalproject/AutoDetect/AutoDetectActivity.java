@@ -19,6 +19,7 @@ import com.example.youneverknow.finalproject.AutoDetect.Adapter.MyPagerAdapter;
 import com.example.youneverknow.finalproject.DataClass.dataFor10days;
 import com.example.youneverknow.finalproject.MainActivity;
 import com.example.youneverknow.finalproject.R;
+import com.example.youneverknow.finalproject.Settings.SettingActivity;
 import com.getbase.floatingactionbutton.FloatingActionButton;
 
 import lecho.lib.hellocharts.view.LineChartView;
@@ -51,6 +52,7 @@ public class AutoDetectActivity extends FragmentActivity{
 
     public void setTabLayout(){
         ViewPager pager = (ViewPager) findViewById(R.id.pager);
+        pager.setOffscreenPageLimit(2);
         pager.setAdapter(new MyPagerAdapter(getSupportFragmentManager(), getApplicationContext()));
         PagerSlidingTabStrip tabs = (PagerSlidingTabStrip)findViewById(R.id.tabs);
         tabs.setViewPager(pager);
@@ -62,7 +64,8 @@ public class AutoDetectActivity extends FragmentActivity{
 
         Notification noti = new Notification.Builder(this)
                 .setContentTitle(dataFor10days.data[0].description)
-                .setContentText(round2decimal(round2decimal(String.valueOf((dataFor10days.data[0].temperature - 273)))) + (char) 0x00B0 + "C" ).setSmallIcon(getIcon(curDescription))
+                .setContentText(temperatureCalculator())
+                .setSmallIcon(getIcon(curDescription))
                 .setContentIntent(pIntent).build();
         NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         noti.flags |= Notification.FLAG_NO_CLEAR;
@@ -208,5 +211,17 @@ public class AutoDetectActivity extends FragmentActivity{
             return R.drawable.sunny;
         else
             return R.drawable.dunno;
+    }
+
+    String temperatureCalculator(){
+        if(SettingActivity.temperatureUnit.equals(SettingActivity.tempC)){
+            return round2decimal(String.valueOf((dataFor10days.data[0].temperature - 273))) + (char) 0x00B0 + "C";
+        } else if(SettingActivity.temperatureUnit.equals(SettingActivity.tempK)){
+            return round2decimal(String.valueOf((dataFor10days.data[0].temperature))) + (char) 0x00B0 + "K";
+        }
+        else if(SettingActivity.temperatureUnit.equals(SettingActivity.tempF)){
+            return round2decimal(String.valueOf((dataFor10days.data[0].temperature - 273) * 1.8 + 32 ))  + (char) 0x00B0 + "F";
+        }
+        else return round2decimal(String.valueOf((dataFor10days.data[0].temperature - 273))) + (char) 0x00B0 + "C";
     }
 }

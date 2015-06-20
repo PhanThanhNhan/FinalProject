@@ -7,14 +7,14 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:background="@color/pink_lable">
+        android:background="#B71C1C">
         <com.example.youneverknow.finalproject.EnterLocation.CustomAutoCompleteView
             android:id="@+id/myautocomplete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:completionThreshold="1"
             android:hint="@string/enterlocation_EnterLocationHint"
-            android:textColorHint="@android:color/white"
+            android:textColorHint="#80FFFFFF"
             android:textColor="@android:color/white"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="35dp">
@@ -27,7 +27,7 @@
             android:layout_alignParentRight="true"
             android:layout_marginRight="20dp"
             android:layout_marginTop="30dp"
-            android:background="@drawable/ic_action_accept"/>
+            android:background="@drawable/ic_action_arrow_right"/>
 
     </RelativeLayout>
 

@@ -89,5 +89,17 @@
     </style>
 
 
+    <style name="widget_style" parent="android:Theme.Translucent">
+        <item name="android:background">#33B71C1C</item>
+    </style>
+
+    <style name="spinnerItemStyle" parent="android:Widget.TextView.SpinnerItem">
+
+    </style>
+
+    <style name="spinnerDropDownItemStyle" parent="android:TextAppearance.Widget.TextView.SpinnerItem">
+
+    </style>
+
 </resources>
  

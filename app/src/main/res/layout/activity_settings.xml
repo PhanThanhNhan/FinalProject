@@ -1,6 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:background="@color/background_floating_material_dark"
+        android:layout_width="match_parent"
+        android:layout_height="80dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/main_Settings"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:layout_marginTop="35dp"
+            android:layout_marginLeft="10dp"/>
+
+    </RelativeLayout>
+
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="60dp">
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="match_parent"
+           android:text="@string/temperatureUnit"
+           android:textSize="20dp"
+           android:gravity="center"
+           android:layout_marginLeft="20dp"/>
+       <Spinner
+           android:id="@+id/temperatureSpinner"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:layout_marginLeft="30dp"/>
+   </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/pressureUnit"
+            android:textSize="20dp"
+            android:gravity="center"
+            android:layout_marginLeft="20dp"/>
+        <Spinner
+            android:id="@+id/pressureSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="30dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/velocityUnit"
+            android:textSize="20dp"
+            android:gravity="center"
+            android:layout_marginLeft="20dp"/>
+        <Spinner
+            android:id="@+id/velocitySpinner"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="30dp"/>
+    </LinearLayout>
+
 
 </LinearLayout>

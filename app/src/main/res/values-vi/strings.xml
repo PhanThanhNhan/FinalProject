@@ -128,4 +128,8 @@
     <string name="overcastClouds">Mây u ám</string>
     <string name="skyIsClear">Trời quang</string>
 
+    <string name="temperatureUnit">Đơn vị nhiệt độ</string>
+    <string name="pressureUnit">Đơn vị áp suất</string>
+    <string name="velocityUnit">Đơn vị vấn tốc</string>
+
 </resources>

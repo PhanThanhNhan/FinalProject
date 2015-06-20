@@ -34,6 +34,7 @@ import com.example.youneverknow.finalproject.DataClass.dataFor5days;
 import com.example.youneverknow.finalproject.DataClass.dataFor5daysDayNode;
 import com.example.youneverknow.finalproject.DataClass.dataFor5daysTimeNode;
 import com.example.youneverknow.finalproject.EnterLocation.EnterLocationActivity;
+import com.example.youneverknow.finalproject.Settings.SettingActivity;
 import com.github.amlcurran.showcaseview.OnShowcaseEventListener;
 import com.github.amlcurran.showcaseview.ShowcaseView;
 import com.github.amlcurran.showcaseview.targets.ViewTarget;
@@ -43,6 +44,7 @@ import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Set;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -79,6 +81,17 @@ public class MainActivity extends AppCompatActivity {
         if (navigationView != null) {
             setupNavigationDrawerContent(navigationView);
         };
+
+        /* Load settings */
+        loadTemperatureSetting();
+        loadPressureSetting();
+        loadVelocitySetting();
+
+        /* Reload last autodetect information */
+        if(loadSaveData(MainActivity.this)){
+            Intent iGo = new Intent(MainActivity.this, AutoDetectActivity.class);
+            startActivity(iGo);
+        }
     }
 
     public void getControl(){
@@ -150,7 +163,9 @@ public class MainActivity extends AppCompatActivity {
         btnMainSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "Function uncompleted", Toast.LENGTH_LONG).show();
+                Intent iGo = new Intent(v.getContext(), SettingActivity.class);
+                startActivity(iGo);
+                isButtonPressed = false;
             }
         });
     }
@@ -605,4 +620,41 @@ public class MainActivity extends AppCompatActivity {
         return description;
     }
 
+    public void loadTemperatureSetting(){
+        SharedPreferences preferences = getSharedPreferences(SettingActivity.spTemperature, Context.MODE_PRIVATE);
+        String unit = preferences.getString("unit", "");
+        if(unit.equals(SettingActivity.tempC))
+            SettingActivity.temperatureUnit = SettingActivity.tempC;
+        else if(unit.equals(SettingActivity.tempK))
+            SettingActivity.temperatureUnit = SettingActivity.tempK;
+        else if(unit.equals(SettingActivity.tempF))
+            SettingActivity.temperatureUnit = SettingActivity.tempF;
+        else SettingActivity.temperatureUnit = SettingActivity.tempC;
+    }
+
+    public void loadPressureSetting(){
+        SharedPreferences preferences = getSharedPreferences(SettingActivity.spPressure, Context.MODE_PRIVATE);
+        String unit = preferences.getString("unit", "");
+        if(unit.equals(SettingActivity.pressATM))
+            SettingActivity.pressureUnit = SettingActivity.pressATM;
+        else if(unit.equals(SettingActivity.pressHPA))
+            SettingActivity.pressureUnit = SettingActivity.pressHPA;
+        else if(unit.equals(SettingActivity.pressMMHG))
+            SettingActivity.pressureUnit = SettingActivity.pressMMHG;
+        else SettingActivity.pressureUnit = SettingActivity.pressHPA;
+    }
+
+    public void loadVelocitySetting(){
+        SharedPreferences preferences = getSharedPreferences(SettingActivity.spVelocity, Context.MODE_PRIVATE);
+        String unit = preferences.getString("unit", "");
+        if(unit.equals(SettingActivity.veloKMH))
+            SettingActivity.velocityUnit = SettingActivity.veloKMH;
+        else if(unit.equals(SettingActivity.veloMS))
+            SettingActivity.velocityUnit = SettingActivity.veloMS;
+        else if(unit.equals(SettingActivity.veloMPH))
+            SettingActivity.velocityUnit = SettingActivity.veloMPH;
+        else if(unit.equals(SettingActivity.veloFTS))
+            SettingActivity.velocityUnit = SettingActivity.veloFTS;
+        else SettingActivity.velocityUnit = SettingActivity.veloMS;
+    }
 }

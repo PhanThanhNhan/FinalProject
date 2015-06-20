@@ -41,6 +41,7 @@ import com.example.youneverknow.finalproject.AutoDetect.ContactActivity;
 import com.example.youneverknow.finalproject.DataClass.dataFor10days;
 import com.example.youneverknow.finalproject.DataClass.dataFor5days;
 import com.example.youneverknow.finalproject.R;
+import com.example.youneverknow.finalproject.Settings.SettingActivity;
 import com.getbase.floatingactionbutton.FloatingActionButton;
 
 import org.w3c.dom.Text;
@@ -102,11 +103,11 @@ public class SuperAwesomeCardFragment extends Fragment{
             });
 
             tvAutoDetectTodayCityName.setText(dataFor10days.cityName);
-            tvAutoDetectTodayTemperature.setText(round2decimal(String.valueOf(dataFor10days.data[0].temperature - 273)) + (char) 0x00B0 + "C");
+            tvAutoDetectTodayTemperature.setText(temperatureCalculator(dataFor10days.data[0].temperature));
             tvAutoDetectTodayDescription.setText(dataFor10days.data[0].description);
-            tvAutoDetectTodayPressure.setText(getString(R.string.pressure) + dataFor10days.data[0].pressure + " hPa");
+            tvAutoDetectTodayPressure.setText(getString(R.string.pressure) + pressureCalculator(dataFor10days.data[0].pressure));
             tvAutoDetectTodayHumidity.setText(getString(R.string.humidity) + dataFor10days.data[0].humidity + "%");
-            tvAutoDetectTodayWind.setText(getString(R.string.wind) + dataFor10days.data[0].wind + " m/s");
+            tvAutoDetectTodayWind.setText(getString(R.string.wind) + windCalculator(dataFor10days.data[0].wind));
             tvAutoDetectTodaySunrise.setText(getString(R.string.sunRise) + dataFor10days.sunRise);
             tvAutoDetectTodaySunset.setText(getString(R.string.sunSet) + dataFor10days.sunSet);
             ivAutoDetectTodayWeatherIcon.setImageResource(getIcon(dataFor10days.data[0].description));
@@ -282,7 +283,7 @@ public class SuperAwesomeCardFragment extends Fragment{
         int iPos = 0;
         for (PointValue value : line.getValues()) {
             // Change target only for Y value.
-            value.setTarget(value.getX(), (float) dataFor5days.data[columnIndex].time[iPos].temperature - 273);
+            value.setTarget(value.getX(), (float) double_temperatureCalculator(dataFor5days.data[columnIndex].time[iPos].temperature));
             ++iPos;
         }
 
@@ -296,11 +297,11 @@ public class SuperAwesomeCardFragment extends Fragment{
         public void onValueSelected(int columnIndex, int subcolumnIndex, SubcolumnValue value) {
             //generateLineData(value.getColor(), 100);
             generateLineData(columnIndex, ChartUtils.COLOR_RED, 100);
-            tvAutoDetect5daysTemperature.setText(round2decimal(String.valueOf(dataFor10days.data[columnIndex].temperature - 273)) + (char) 0x00B0 + "C");
+            tvAutoDetect5daysTemperature.setText(temperatureCalculator(dataFor10days.data[columnIndex].temperature));
             tvAutoDetect5daysDescription.setText(dataFor10days.data[columnIndex].description);
-            tvAutoDetect5daysPressure.setText(getString(R.string.pressure) + dataFor10days.data[columnIndex].pressure + " hPa");
+            tvAutoDetect5daysPressure.setText(getString(R.string.pressure) + pressureCalculator(dataFor10days.data[columnIndex].pressure));
             tvAutoDetect5daysHumidity.setText(getString(R.string.humidity) + dataFor10days.data[columnIndex].humidity + "%");
-            tvAutoDetect5daysWind.setText(getString(R.string.wind) + dataFor10days.data[columnIndex].wind + " m/s");
+            tvAutoDetect5daysWind.setText(getString(R.string.wind) + windCalculator(dataFor10days.data[columnIndex].wind));
             ivAutoDetect5daysWeatherIcon.setImageResource(getIcon(dataFor10days.data[columnIndex].description));
             if(columnIndex == 0)
                 tvAutoDetect5daysTime.setText(getString(R.string.today));
@@ -350,11 +351,11 @@ public class SuperAwesomeCardFragment extends Fragment{
                     tempTime = "21h";
                     break;
             }
-            tvAutoDetect5daysTemperature.setText(round2decimal(String.valueOf(dataFor5days.data[columnSelectedIndex].time[i1].temperature - 273)) + (char) 0x00B0 + "C");
+            tvAutoDetect5daysTemperature.setText(temperatureCalculator(dataFor5days.data[columnSelectedIndex].time[i1].temperature));
             tvAutoDetect5daysDescription.setText(dataFor5days.data[columnSelectedIndex].time[i1].description);
-            tvAutoDetect5daysPressure.setText(getString(R.string.pressure) + dataFor5days.data[columnSelectedIndex].time[i1].pressure + " hPa");
+            tvAutoDetect5daysPressure.setText(getString(R.string.pressure) + pressureCalculator(dataFor5days.data[columnSelectedIndex].time[i1].pressure));
             tvAutoDetect5daysHumidity.setText(getString(R.string.humidity) + dataFor5days.data[columnSelectedIndex].time[i1].humidity + "%");
-            tvAutoDetect5daysWind.setText(getString(R.string.wind) + dataFor5days.data[columnSelectedIndex].time[i1].wind + " m/s");
+            tvAutoDetect5daysWind.setText(getString(R.string.wind) + windCalculator(dataFor5days.data[columnSelectedIndex].time[i1].wind));
             ivAutoDetect5daysWeatherIcon.setImageResource(getIcon(dataFor5days.data[columnSelectedIndex].time[i1].description));
             if(columnSelectedIndex == 0)
                 tvAutoDetect5daysTime.setText(getString(R.string.today) + ": " + tempTime);
@@ -490,7 +491,7 @@ public class SuperAwesomeCardFragment extends Fragment{
         for (PointValue value : line.getValues()) {
             // Change target only for Y value.
             //value.setTarget(value.getX(), (float) Math.random() * range);
-            value.setTarget(value.getX(), (float) dataFor10days.data[iPos].temperature - 273);
+            value.setTarget(value.getX(), (float) double_temperatureCalculator(dataFor10days.data[iPos].temperature));
             ++iPos;
         }
 
@@ -503,11 +504,11 @@ public class SuperAwesomeCardFragment extends Fragment{
         @Override
         public void onValueSelected(int columnIndex, int subcolumnIndex, SubcolumnValue value) {
 
-            tvAutoDetect10daysTemperature.setText(round2decimal(String.valueOf(dataFor10days.data[columnIndex].temperature - 273)) + (char) 0x00B0 + "C");
+            tvAutoDetect10daysTemperature.setText(temperatureCalculator(dataFor10days.data[columnIndex].temperature));
             tvAutoDetect10daysDescription.setText(dataFor10days.data[columnIndex].description);
-            tvAutoDetect10daysPressure.setText(getString(R.string.pressure) + dataFor10days.data[columnIndex].pressure + " hPa");
+            tvAutoDetect10daysPressure.setText(getString(R.string.pressure) + pressureCalculator(dataFor10days.data[columnIndex].pressure));
             tvAutoDetect10daysHumidity.setText(getString(R.string.humidity) + dataFor10days.data[columnIndex].humidity + "%");
-            tvAutoDetect10daysWind.setText(getString(R.string.wind) + dataFor10days.data[columnIndex].wind + " m/s");
+            tvAutoDetect10daysWind.setText(getString(R.string.wind) + windCalculator(dataFor10days.data[columnIndex].wind));
             ivAutoDetect10daysWeatherIcon.setImageResource(getIcon(dataFor10days.data[columnIndex].description));
             if(columnIndex == 0)
                 tvAutoDetect10daysTime.setText(getString(R.string.today));
@@ -523,11 +524,11 @@ public class SuperAwesomeCardFragment extends Fragment{
 
         @Override
         public void onValueSelected(int i, int i1, PointValue pointValue) {
-            tvAutoDetect10daysTemperature.setText(round2decimal(String.valueOf(dataFor10days.data[i1].temperature - 273)) + (char) 0x00B0 + "C");
+            tvAutoDetect10daysTemperature.setText(temperatureCalculator(dataFor10days.data[i1].temperature));
             tvAutoDetect10daysDescription.setText(dataFor10days.data[i1].description);
-            tvAutoDetect10daysPressure.setText(getString(R.string.pressure) + dataFor10days.data[i1].pressure + " hPa");
+            tvAutoDetect10daysPressure.setText(getString(R.string.pressure) + pressureCalculator(dataFor10days.data[i1].pressure));
             tvAutoDetect10daysHumidity.setText(getString(R.string.humidity) + dataFor10days.data[i1].humidity + "%");
-            tvAutoDetect10daysWind.setText(getString(R.string.wind) + dataFor10days.data[i1].wind + " m/s");
+            tvAutoDetect10daysWind.setText(getString(R.string.wind) + windCalculator(dataFor10days.data[i1].wind));
             ivAutoDetect10daysWeatherIcon.setImageResource(getIcon(dataFor10days.data[i1].description));
             if(i1 == 0)
                 tvAutoDetect10daysTime.setText(getString(R.string.today));
@@ -679,5 +680,50 @@ public class SuperAwesomeCardFragment extends Fragment{
             return R.drawable.sunny;
         else
             return R.drawable.dunno;
+    }
+
+    String temperatureCalculator(double curTemperature){
+        if(SettingActivity.temperatureUnit.equals(SettingActivity.tempC)){
+            return round2decimal(String.valueOf((curTemperature - 273))) + (char) 0x00B0 + "C";
+        } else if(SettingActivity.temperatureUnit.equals(SettingActivity.tempK)){
+            return round2decimal(String.valueOf((curTemperature))) + (char) 0x00B0 + "K";
+        }
+        else if(SettingActivity.temperatureUnit.equals(SettingActivity.tempF)){
+            return round2decimal(String.valueOf((curTemperature - 273) * 1.8 + 32 ))  + (char) 0x00B0 + "F";
+        }
+        else return round2decimal(String.valueOf((curTemperature - 273))) + (char) 0x00B0 + "C";
+    }
+
+    double double_temperatureCalculator(double curTemperature){
+        if(SettingActivity.temperatureUnit.equals(SettingActivity.tempC)){
+            return curTemperature - 273;
+        } else if(SettingActivity.temperatureUnit.equals(SettingActivity.tempK)){
+            return curTemperature;
+        }
+        else if(SettingActivity.temperatureUnit.equals(SettingActivity.tempF)){
+            return (curTemperature - 273) * 1.8 + 32;
+        }
+        else return curTemperature - 273;
+    }
+
+    String pressureCalculator(double curPressure){
+        if(SettingActivity.pressureUnit.equals(SettingActivity.pressATM))
+            return round2decimal(String.valueOf(curPressure * 100 * 9.86923267 * 0.000001)) + " atm";
+        else if(SettingActivity.pressureUnit.equals(SettingActivity.pressHPA))
+            return String.valueOf(curPressure) + " hPa";
+        else if(SettingActivity.pressureUnit.equals(SettingActivity.pressMMHG))
+            return round2decimal(String.valueOf(curPressure * 100 * 0.00750061683)) + " mmHg";
+        return String.valueOf(curPressure) + " hPa";
+    }
+    String windCalculator(double curWind){
+        if(SettingActivity.velocityUnit.equals(SettingActivity.veloKMH))
+            return round2decimal(String.valueOf(curWind * 3.6)) + " km/h";
+        else if(SettingActivity.velocityUnit.equals(SettingActivity.veloMS))
+            return curWind + " m/s";
+        else if(SettingActivity.velocityUnit.equals(SettingActivity.veloMPH))
+            return round2decimal(String.valueOf(curWind * 2.23694)) + " mph";
+        else if(SettingActivity.velocityUnit.equals(SettingActivity.veloFTS))
+            return round2decimal(String.valueOf(curWind * 3.28084)) + " ft/s";
+        else return curWind + " m/s";
     }
 }

@@ -1,6 +1,5 @@
 package com.example.youneverknow.finalproject.Widget;
 
-import android.app.Activity;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
@@ -8,25 +7,14 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.util.Log;
 import android.widget.RemoteViews;
-import android.widget.Toast;
 
-import com.example.youneverknow.finalproject.AsyncTask.getWeatherUsingCoordinate;
-import com.example.youneverknow.finalproject.DataClass.dataFor10days;
-import com.example.youneverknow.finalproject.DataClass.dataFor10daysNode;
-import com.example.youneverknow.finalproject.DataClass.dataFor5days;
-import com.example.youneverknow.finalproject.DataClass.dataFor5daysDayNode;
-import com.example.youneverknow.finalproject.DataClass.dataFor5daysTimeNode;
-import com.example.youneverknow.finalproject.MainActivity;
 import com.example.youneverknow.finalproject.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Random;
 
 /**
@@ -37,6 +25,9 @@ public class MyWidget extends AppWidgetProvider {
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager,
                          int[] appWidgetIds) {
+
+        loadTemperatureSetting(context);
+        loadPressureSetting(context);
 
         // Get all ids
         ComponentName thisWidget = new ComponentName(context,
@@ -73,10 +64,10 @@ public class MyWidget extends AppWidgetProvider {
                 }
                 // Settext
                 curDescription = chooseDescription(context, curDescription);
-                remoteViews.setTextViewText(R.id.tvWidgetTemperature, round2decimal(String.valueOf(curTemperature - 273)) + (char) 0x00B0 + "C");
+                remoteViews.setTextViewText(R.id.tvWidgetTemperature, temperatureCalculator());
                 remoteViews.setTextViewText(R.id.tvWidgetDescription, curDescription);
                 remoteViews.setTextViewText(R.id.tvWidgetHumidity, String.valueOf(curHumidity) + "%");
-                remoteViews.setTextViewText(R.id.tvWidgetPressure, String.valueOf(curPressure) + "hPa");
+                remoteViews.setTextViewText(R.id.tvWidgetPressure, pressureCalculator());
                 remoteViews.setImageViewResource(R.id.ivWidgetWeatherIcon, getIcon(context, curDescription));
             }
             // Register an onClickListener
@@ -357,6 +348,50 @@ public class MyWidget extends AppWidgetProvider {
                 return context.getString(R.string.skyIsClear);
         }
         return description;
+    }
+
+    public static final String tempC = (char) 0x00B0 + "C";
+    public static final String tempK = (char) 0x00B0 + "K";
+    public static final String tempF = (char) 0x00B0 + "F";
+
+    public static final String pressATM = "atm";
+    public static final String pressHPA = "hPa";
+    public static final String pressMMHG = "mmHg";
+
+
+    public static final String spTemperature = "spTemperature";
+    public static final String spPressure = "spPressure";
+    String temperatureUnit, pressureUnit;
+
+    public void loadTemperatureSetting(Context context){
+        SharedPreferences preferences = context.getSharedPreferences(spTemperature, Context.MODE_PRIVATE);
+        temperatureUnit = preferences.getString("unit", "");
+    }
+
+    public void loadPressureSetting(Context context){
+        SharedPreferences preferences = context.getSharedPreferences(spPressure, Context.MODE_PRIVATE);
+        pressureUnit = preferences.getString("unit", "");
+    }
+
+    String temperatureCalculator(){
+        if(temperatureUnit.equals(tempC)){
+            return round2decimal(String.valueOf((curTemperature - 273))) + (char) 0x00B0 + "C";
+        } else if(temperatureUnit.equals(tempK)){
+            return round2decimal(String.valueOf((curTemperature))) + (char) 0x00B0 + "K";
+        }
+        else if(temperatureUnit.equals(tempF)){
+            return round2decimal(String.valueOf((curTemperature - 273) * 1.8 + 32 )) + (char) 0x00B0 + "F";
+        } else return round2decimal(String.valueOf((curTemperature - 273))) + (char) 0x00B0 + "C";
+    }
+
+    String pressureCalculator(){
+        if(pressureUnit.equals(pressATM))
+            return round2decimal(String.valueOf(curPressure * 100 * 9.86923267 * 0.000001)) + " atm";
+        else if(pressureUnit.equals(pressHPA))
+            return String.valueOf(curPressure) + " hPa";
+        else if(pressureUnit.equals(pressMMHG))
+            return round2decimal(String.valueOf(curPressure * 100 * 0.00750061683)) + " mmHg";
+        return String.valueOf(curPressure) + " hPa";
     }
 
 }

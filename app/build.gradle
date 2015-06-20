@@ -32,5 +32,5 @@ dependencies {
     compile 'com.avast:android-styled-dialogs:2.2.0'
     compile 'com.github.amlcurran.showcaseview:library:5.0.0'
     compile 'com.kyleduo.switchbutton:library:1.2.8'
-
+    compile 'com.weiwangcn.betterspinner:library:1.1.0'
 }

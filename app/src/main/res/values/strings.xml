@@ -128,4 +128,8 @@
     <string name="overcastClouds">Overcast clouds</string>
     <string name="skyIsClear">Sky is clear</string>
 
+    <string name="temperatureUnit">Temperature Unit</string>
+    <string name="pressureUnit">Pressure Unit</string>
+    <string name="velocityUnit">Velocity Unit</string>
+
 </resources>

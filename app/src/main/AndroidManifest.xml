@@ -39,7 +39,7 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".EnterLocation.EnterLocationActivity" />
         <activity android:name=".ChooseOnMap.ChooseOnMapActivity" />
-        <activity android:name=".Settings.SettingActivity" />
+        <activity android:name=".Settings.SettingActivity"/>
         <activity android:name=".AutoDetect.ContactActivity" />
 
         <receiver android:name=".Widget.MyWidget" >
