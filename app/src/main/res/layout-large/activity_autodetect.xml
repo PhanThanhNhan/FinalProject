@@ -16,21 +16,21 @@
             android:id="@+id/tvAutoDetectCityname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
+            android:textSize="30dp"
             android:textColor="@android:color/white"
             android:text="New York"
-            android:paddingTop="10dp"
-            android:paddingLeft="10dp"
+            android:paddingTop="20dp"
+            android:paddingLeft="35dp"
             android:layout_alignParentBottom="true"/>
     </RelativeLayout>
 
     <com.astuetz.PagerSlidingTabStrip
         android:id="@+id/tabs"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         android:background="@color/green"
         app:pstsPaddingMiddle="true"
-        android:textSize="15dp"
+        android:textSize="20dp"
         />
 
     <android.support.v4.view.ViewPager

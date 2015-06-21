@@ -5,7 +5,6 @@
         <menu>
             <item
                 android:id="@+id/item_navigation_drawer_lastCheck"
-                android:icon="@drawable/ic_help"
                 android:title="@string/lastCheck" />
         </menu>
     </item>

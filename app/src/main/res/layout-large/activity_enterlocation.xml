@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@color/pink_lable">
+        <com.example.youneverknow.finalproject.EnterLocation.CustomAutoCompleteView
+            android:id="@+id/myautocomplete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:completionThreshold="1"
+            android:hint="@string/enterlocation_EnterLocationHint"
+            android:textColorHint="@android:color/white"
+            android:textColor="@android:color/white"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="30dp"
+            android:textSize="40dp">
+        </com.example.youneverknow.finalproject.EnterLocation.CustomAutoCompleteView>
+
+        <ImageButton
+            android:id="@+id/ibtnEnterLocationOK"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/ic_action_accept"/>
+
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/lvEnterLocationCountryList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp">
+
+    </ListView>
+
+</LinearLayout>

@@ -132,4 +132,31 @@
     <string name="pressureUnit">Đơn vị áp suất</string>
     <string name="velocityUnit">Đơn vị vấn tốc</string>
 
+    <string name="facebook_app_id">1682759801955218</string>
+    <string name="facebook_app_name">HelloFBSample</string>
+    <string name="cancelled">Cancelled</string>
+    <string name="permission_not_granted">Unable to perform selected action because permissions were not granted.</string>
+    <string name="ok">OK</string>
+    <string name="hello_user">Hello %1$s!</string>
+    <string name="success">Success</string>
+    <string name="successfully_posted_post">Post ID: %1$s</string>
+    <string name="error">Error</string>
+    <string name="status_update">Updating status for %1$s at %2$s</string>
+    <string name="photo_post">Photo Post</string>
+    <string name="you_picked">You picked:</string>
+    <string name="no_friends_selected">&lt;No friends selected&gt;</string>
+    <string name="no_place_selected">&lt;No place selected&gt;</string>
+    <string name="pick_seattle_place">Pick a Seattle Place</string>
+    <string name="exception">Exception: %1$s</string>
+
+
+    <string name="action_left">Facebook</string>
+    <string name="action_mid">Twitter</string>
+    <string name="action_right">Messenger</string>
+    <string name="functionComingSoon">Chức năng đang được phát triển</string>
+
+    <string name="helloFacebook">Open weather map</string>
+    <string name="facebookDescription">Dự báo thời tiết miễn phí. Chúng tôi cung cấp 1 triệu dự báo mỗi ngày</string>
+    <string name="facebookURL">http://openweathermap.org/</string>
+
 </resources>

@@ -17,9 +17,11 @@ import com.astuetz.PagerSlidingTabStrip;
 import com.example.youneverknow.finalproject.AsyncTask.getWeatherUsingCoordinate;
 import com.example.youneverknow.finalproject.AutoDetect.Adapter.MyPagerAdapter;
 import com.example.youneverknow.finalproject.DataClass.dataFor10days;
+import com.example.youneverknow.finalproject.IntroActivity;
 import com.example.youneverknow.finalproject.MainActivity;
 import com.example.youneverknow.finalproject.R;
 import com.example.youneverknow.finalproject.Settings.SettingActivity;
+import com.facebook.FacebookSdk;
 import com.getbase.floatingactionbutton.FloatingActionButton;
 
 import lecho.lib.hellocharts.view.LineChartView;
@@ -36,6 +38,7 @@ public class AutoDetectActivity extends FragmentActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FacebookSdk.sdkInitialize(this.getApplicationContext());
         setContentView(R.layout.activity_autodetect);
 
         setTabLayout();
@@ -59,7 +62,7 @@ public class AutoDetectActivity extends FragmentActivity{
     }
 
     public void setNotification(){
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, IntroActivity.class);
         PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent, 0);
 
         Notification noti = new Notification.Builder(this)

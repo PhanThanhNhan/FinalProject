@@ -51,8 +51,9 @@
                             android:id="@+id/tvAutoDetectTodayCityname"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginLeft="35dp"
                             android:text="New York, US"
-                            android:textSize="20dp"/>
+                            android:textSize="45dp"/>
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -60,16 +61,18 @@
                         android:layout_weight="2"
                         android:weightSum="5"
                         android:orientation="horizontal">
-                        <LinearLayout
+                        <RelativeLayout
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="2">
+                            android:layout_weight="2"
+                            >
                             <ImageView
+                                android:layout_centerInParent="true"
                                 android:id="@+id/ivAutoDetectTodayWeatherIcon"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"/>
 
-                        </LinearLayout>
+                        </RelativeLayout>
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
@@ -80,14 +83,14 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="25 C"
-                                android:textSize="40dp"
+                                android:textSize="80dp"
                                 android:layout_gravity="center"/>
                             <TextView
                                 android:id="@+id/tvAutoDetectTodayWeatherDescription"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Sunny"
-                                android:textSize="20dp"
+                                android:textSize="40dp"
                                 android:layout_gravity="center"/>
                         </LinearLayout>
                     </LinearLayout>
@@ -139,19 +142,19 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Pressure: 1000 hPa"
-                                android:textSize="15dp"/>
+                                android:textSize="30dp"/>
                             <TextView
                                 android:id="@+id/tvAutoDetectTodayHumidity"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Humidity: 87%"
-                                android:textSize="15dp"/>
+                                android:textSize="30dp"/>
                             <TextView
                                 android:id="@+id/tvAutoDetectTodayWind"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Wind: 2 m/s"
-                                android:textSize="15dp"/>
+                                android:textSize="30dp"/>
                         </LinearLayout>
                         <LinearLayout
                             android:layout_width="0dp"
@@ -163,14 +166,14 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Sunrise: 06:30"
-                                android:textSize="15dp"
+                                android:textSize="30dp"
                                 android:layout_gravity="right"/>
                             <TextView
                                 android:id="@+id/tvAutoDetectTodaySunset"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Sunset: 18:30"
-                                android:textSize="15dp"
+                                android:textSize="30dp"
                                 android:layout_gravity="right"/>
                         </LinearLayout>
                     </LinearLayout>
@@ -178,12 +181,11 @@
                 <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_weight="2"
-                        android:gravity="center">
+                        android:layout_weight="2">
                     <lt.lemonlabs.android.expandablebuttonmenu.ExpandableMenuOverlay
                         android:id="@+id/btnShare"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
+                        android:layout_width="200dp"
+                        android:layout_height="200dp"
                         android:layout_alignParentBottom="true"
                         android:layout_centerHorizontal="true"
                         android:src="@drawable/ic_share"
@@ -197,7 +199,9 @@
                         ebm:leftButtonSrc="@drawable/ic_facebook"
                         ebm:midButtonSrc="@drawable/ic_twitter"
                         ebm:rightButtonSrc="@drawable/ic_messenger"
-                        />
+                        ebm:leftButtonText="@string/action_left"
+                        ebm:midButtonText="@string/action_mid"
+                        ebm:rightButtonText="@string/action_right"/>
                 </RelativeLayout>
             </LinearLayout>
             <LinearLayout
